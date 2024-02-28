@@ -19,7 +19,7 @@ public class Agente {
     public void executar(){}
 
     protected Percepcao percepcionar(){
-        return new Percepcao(null);
+        return new Percepcao(ambiente.observar());
     }
 
     protected void actuar(Accao accao){}
