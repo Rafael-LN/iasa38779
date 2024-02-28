@@ -18,10 +18,10 @@ public class Agente {
 
     public void executar(){}
 
-    Percepcao percepcionar(){
+    protected Percepcao percepcionar(){
         return new Percepcao(null);
     }
 
-    void actuar(Accao accao){}
+    protected void actuar(Accao accao){}
 
 }
