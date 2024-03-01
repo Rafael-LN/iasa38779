@@ -16,12 +16,19 @@ public class Agente {
         this.controlo = controlo;
     }
 
-    public void executar(){}
+    public void executar(){
+        Percepcao percepcao = percepcionar();
+        Accao accao = controlo.processar(percepcao);
+        actuar(accao);
+        ambiente.evoluir();
+    }
 
     protected Percepcao percepcionar(){
         return new Percepcao(ambiente.observar());
     }
 
-    protected void actuar(Accao accao){}
+    protected void actuar(Accao accao){
+        ambiente.executar(accao.getComando());
+    }
 
 }
