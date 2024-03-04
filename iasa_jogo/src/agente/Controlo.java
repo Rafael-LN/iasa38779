@@ -1,14 +1,13 @@
 package agente;
 
 /**
- * A interface Controlo define  
+ * Interface que define o comportamento para o controlo de um sistema,
+ * onde uma percepção é processada para gerar uma acção correspondente.
  */
 public interface Controlo {
 
     /**
-     * Ao processar uma precepcao é gerado uma accao com base nessa percepcao
-     * @param percepcao
-     * @return Accao
+     * Processa uma percepção e gera uma acção correspondente.
      */
     public Accao processar(Percepcao percepcao);
 }
