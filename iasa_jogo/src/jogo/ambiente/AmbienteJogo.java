@@ -32,7 +32,9 @@ public class AmbienteJogo implements Ambiente{
      */
     @Override
     public void evoluir() {
-        eventos.add(gerarEvento());
+        System.out.println(eventos);
+        evento = gerarEvento();
+        eventos.add(evento);
     }
 
      /**
@@ -40,6 +42,8 @@ public class AmbienteJogo implements Ambiente{
      */
     @Override
     public Evento observar() {
+        System.out.println(evento);
+        System.out.println(eventos);
         return evento;
     }
 

@@ -5,6 +5,8 @@ import agente.Controlo;
 import agente.Percepcao;
 import jogo.ambiente.ComandoJogo;
 import jogo.ambiente.EventoJogo;
+import maqest.Estado;
+import maqest.MaquinaEstados;
 
 /**
  * Classe que implementa o controlo específico da personagem de um jogo.
@@ -13,7 +15,18 @@ import jogo.ambiente.EventoJogo;
  */
 public class ControloPersonagem implements Controlo {
 
-    public ControloPersonagem(){}
+    private MaquinaEstados maqEst;
+    private Estado estado;
+
+    public ControloPersonagem(){
+        Estado procura = new Estado("Procura");
+        maqEst = new MaquinaEstados(procura);
+    }
+
+
+    public Estado getEstado() {
+        return estado;
+    }
 
     /**
      * Processa uma percepção recebida pelo agente e determina a acção a ser tomada com base nessa percepção.
@@ -26,7 +39,8 @@ public class ControloPersonagem implements Controlo {
         
         EventoJogo evento = (EventoJogo) percepcao.getEvento();
 
-        evento.mostrar();
+        Accao accao = maqEst.processar(evento);
+
 
         ComandoJogo comandoJogo;
         
@@ -56,5 +70,6 @@ public class ControloPersonagem implements Controlo {
      * Mostra o estado atual da personagem
      */
     private void mostrar(){}
+
     
 }
