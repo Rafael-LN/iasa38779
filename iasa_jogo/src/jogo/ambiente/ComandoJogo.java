@@ -16,7 +16,7 @@ public enum ComandoJogo implements Comando {
 
     @Override
     public void mostrar() {
-        System.out.println(this);
+        System.out.println(this.name());
     }
     
 }
