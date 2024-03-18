@@ -17,6 +17,6 @@ public enum EventoJogo implements Evento {
 
     @Override
     public void mostrar() {
-        System.out.println(this.name());
+        System.out.println("Evento: " + this.name());
     }
 }
