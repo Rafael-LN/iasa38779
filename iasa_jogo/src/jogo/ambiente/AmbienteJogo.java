@@ -1,7 +1,10 @@
 package jogo.ambiente;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.Scanner;
 
 import ambiente.Ambiente;
@@ -17,14 +20,22 @@ import ambiente.Evento;
 public class AmbienteJogo implements Ambiente{
 
     private EventoJogo evento;
-    private List<EventoJogo> eventos;
+    private Map<String, EventoJogo> eventos;
     
     /**
-     * Inicializa a lista de eventos com um evento inicial.
+     * Construtor padrão que inicializa o ambiente do jogo com um evento inicial.
+     * Inicializa também a lista de eventos disponíveis.
      */
     public AmbienteJogo(){
-        eventos = new ArrayList<EventoJogo>();
-        eventos.add(EventoJogo.SILENCIO);
+        evento = EventoJogo.SILENCIO;
+
+        eventos = new HashMap<String, EventoJogo>();
+        eventos.put("SILENCIO", EventoJogo.SILENCIO);
+        eventos.put("RUIDO", EventoJogo.RUIDO);
+        eventos.put("ANIMAL", EventoJogo.ANIMAL);
+        eventos.put("FUGA", EventoJogo.FUGA);
+        eventos.put("FOTOGRAFIA", EventoJogo.FOTOGRAFIA);
+        eventos.put("TERMINAR", EventoJogo.TERMINAR);
     }
 
     /**
@@ -32,19 +43,20 @@ public class AmbienteJogo implements Ambiente{
      */
     @Override
     public void evoluir() {
-        eventos.add(gerarEvento());
+        evento = gerarEvento();
     }
 
      /**
-     * Retorna o evento atual no ambiente.
+     * Mostra e retorna o evento atual quando o ambiente é observado.
      */
     @Override
     public Evento observar() {
+        evento.mostrar();
         return evento;
     }
 
     /**
-     * Executa um comando no ambiente do jogo.
+     * Executa um comando no ambiente do jogo, mostrando o comando executado.
      */
     @Override
     public void executar(Comando comando) {
@@ -55,11 +67,23 @@ public class AmbienteJogo implements Ambiente{
      * Gera um novo Evento com base no utilizador
      */
     private EventoJogo gerarEvento(){
-        try (Scanner scanner = new Scanner(System.in)) {
-            String s = scanner.nextLine();
+        Scanner scanner = new Scanner(System.in);
+        EventoJogo novoEvento = null;
 
-            return EventoJogo.valueOf(s.toUpperCase());
-        }
+        do {
+            System.out.println("\nEvento?");
+            String eventoPretendido = scanner.nextLine();
+            System.out.println();
+            novoEvento = eventos.get(eventoPretendido.toUpperCase());
+
+            if (novoEvento == null) {
+                System.out.println("\u001B[1;31mEvento inválido.\u001B[0m");
+            }
+            
+        } while (novoEvento == null);
+
+        return novoEvento;
+        
     }
 
     /**
