@@ -8,6 +8,8 @@ class EstimuloAlvo(Estimulo):
         self.__gama = gama
         
     def detectar(self, percepcao):
-        return percepcao[self.__direccao].distancia ** self.__gama
-        
+        perDir = percepcao[self.__direccao]
+        if(perDir.elemento == "A"):
+            return perDir.distancia ** self.__gama
+        return 0
         
