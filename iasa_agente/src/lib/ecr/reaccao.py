@@ -16,7 +16,7 @@ class Reaccao(Comportamento):
         self.estimulo = estimulo
         self.resposta = resposta
         
-    def activar(self, percepcao: Percepcao):
+    def activar(self, percepcao):
         """
         Ativa a reação com base numa perceção.
 
