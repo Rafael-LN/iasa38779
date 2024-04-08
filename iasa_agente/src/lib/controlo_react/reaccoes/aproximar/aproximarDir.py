@@ -9,4 +9,4 @@ class AproximarDir(Reaccao):
     Herda da classe Reaccao.
     """
     def __init__(self, direccao):
-        super(AproximarAlvo(direccao), RespostaMover(direccao))
+        super().__init__(AproximarAlvo(direccao), RespostaMover(direccao))
