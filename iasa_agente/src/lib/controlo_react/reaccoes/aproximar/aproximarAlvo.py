@@ -1,4 +1,6 @@
+from controlo_react.reaccoes.aproximar.aproximarDir import AproximarDir
 from ecr.prioridade import Prioridade
+from sae.ambiente.direccao import Direccao
 
 
 class AproximarAlvo(Prioridade):
@@ -7,11 +9,6 @@ class AproximarAlvo(Prioridade):
     Herda da classe Prioridade.
     """
 
-    def __init__(self, comportamentos):
-        """
-        Método construtor da classe AproximarAlvo.
+    def __init__(self):
         
-        Args:
-            comportamentos (list): Lista de comportamentos que serão priorizados para a aproximação do alvo.
-        """
-        super().__init__(comportamentos)  # Inicializa a classe pai (Prioridade) com a lista de comportamentos fornecida.
+        super().__init__([AproximarDir(direction) for direction in Direccao])  # Inicializa a classe pai (Prioridade) com a lista de comportamentos fornecida.
