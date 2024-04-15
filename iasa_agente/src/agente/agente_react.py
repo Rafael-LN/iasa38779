@@ -10,7 +10,7 @@ from sae.simulador import Simulador
 class AgenteReact(Agente):
     
     def __init__(self):
-        controlo = ControloReact(Recolher([Explorar(), AproximarAlvo(), EvitarObst()]))
+        controlo = ControloReact(Recolher([AproximarAlvo(), EvitarObst(), Explorar()]))
         controlo.mostrar_per_dir = True
         super().__init__(controlo)
         
