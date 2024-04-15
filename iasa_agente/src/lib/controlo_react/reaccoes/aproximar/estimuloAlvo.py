@@ -1,4 +1,5 @@
 from ecr.estimulo import Estimulo
+from sae.ambiente.elemento import Elemento
 
 class EstimuloAlvo(Estimulo):
     """
@@ -20,13 +21,12 @@ class EstimuloAlvo(Estimulo):
     def detectar(self, percepcao):
         """
         Método para detectar a presença do alvo na percepção.
-        
+    
         Args:
             percepcao (list): Percepção atual do ambiente.
-            
+        
         Returns:
-            O valor do estímulo associado à presença do alvo na direção especificada.
+            O valor do estímulo associado à presença do alvo na direção especificada, ou 0 se o alvo não estiver presente.
         """
-        if percepcao[self.__direccao] == "A":  # Se o alvo estiver presente na direção especificada
-            return percepcao[1] ** self.__gama  # Retorna o valor do estímulo com desconto gamma
-        return 0  # Retorna 0 se o alvo não estiver presente na direção especificada
+        return percepcao[1] ** self.__gama if percepcao[self.__direccao] == Elemento.ALVO else 0
+
