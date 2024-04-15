@@ -9,12 +9,11 @@ class RespostaEvitar(RespostaMover):
         super().__init__(dir_inicial)
     
     def activar(self, percepcao, intensidade):
-        if not percepcao.contacto_obst(self._accao.direccao):
-            self._accao.direccao = self.dir_inical
+        if percepcao.contacto_obst(self._accao.direccao):
+           self.__alterar_direccao(percepcao)
         
-        self._accao.prioridade = intensidade
         
-        return self._accao
+        return super().activar(percepcao, intensidade)
     
     
     def __alterar_direccao(self, percepcao):
@@ -31,8 +30,7 @@ class RespostaEvitar(RespostaMover):
         return direccao_livre
     
     def __direccao_livre(self, percepcao):
-        while True:
-            direccao = choice([direccao for direccao in Direccao])
-            if percepcao.contacto_obst(direccao):
+        for direccao in list(Direccao):
+            if not percepcao.contacto_obst(direccao):
                 return direccao
         
