@@ -10,6 +10,13 @@ class MecanismoProcura(ABC):
     @property
     def nos_processados(self):
         return self.__nos_processados
+    
+    @property
+    @abstractmethod
+    def nos_memoria(self):
+        """
+        Obter número máximo de nós em memória
+        """
         
     def _iniciar_memoria(self): pass
     
