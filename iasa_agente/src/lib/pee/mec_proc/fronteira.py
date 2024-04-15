@@ -5,7 +5,11 @@ class Fronteira(ABC):
     
     def __init__(self):
         self._nos
-        self.vazia
+        
+    @property
+    def vazia(self):
+        return len(self._nos) == 0
+
     
     def iniciar(self): pass
     
