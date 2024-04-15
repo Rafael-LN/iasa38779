@@ -11,7 +11,14 @@ class Solucao():
             inserir passo no percurso na primeira posição da estrutura
             atualizar o nó
         '''
-
+        
+    @property
+    def dimensao(self):
+        return len(self.__percurso)
+    
+    @property
+    def custo(self):
+        return self.__no_final.custo
 
     def __iter__(self):
         return iter(self.__percurso)
