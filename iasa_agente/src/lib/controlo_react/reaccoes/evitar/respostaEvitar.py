@@ -10,10 +10,8 @@ class RespostaEvitar(RespostaMover):
         super().__init__(dir_inicial)
     
     def activar(self, percepcao, intensidade):
-        if percepcao.contacto_obst(self.dir_inicial):
+        if not percepcao.contacto_obst(self._accao.direccao):
             self._accao.direccao = self.dir_inical
-        else:
-            self._accao.direccao = self.__alterar_direccao(percepcao)
         
         self._accao.prioridade = intensidade
         
