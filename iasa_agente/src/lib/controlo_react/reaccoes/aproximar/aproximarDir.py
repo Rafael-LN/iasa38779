@@ -1,4 +1,4 @@
-from controlo_react.reaccoes.aproximar.aproximarAlvo import AproximarAlvo
+from controlo_react.reaccoes.aproximar.estimuloAlvo import EstimuloAlvo
 from controlo_react.reaccoes.resposta.respostaMover import RespostaMover
 from ecr.reaccao import Reaccao
 
@@ -9,4 +9,11 @@ class AproximarDir(Reaccao):
     Herda da classe Reaccao.
     """
     def __init__(self, direccao):
-        super().__init__(AproximarAlvo(direccao), RespostaMover(direccao))
+        """
+        Método construtor da classe AproximarDir.
+        
+        Args:
+            direccao (int): Direção para a qual o agente deve se aproximar.
+        """
+        super().__init__(EstimuloAlvo(direccao), RespostaMover(direccao))
+        # Inicializa a classe pai (Reaccao) com um estímulo associado à direção especificada e uma resposta para mover na mesma direção.
