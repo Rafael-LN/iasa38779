@@ -5,6 +5,11 @@ class MecanismoProcura(ABC):
     
     def __init__(self, fronteira):
         self._fronteira = fronteira
+        self.__nos_processados = 0
+    
+    @property
+    def nos_processados(self):
+        return self.__nos_processados
         
     def _iniciar_memoria(self): pass
     
