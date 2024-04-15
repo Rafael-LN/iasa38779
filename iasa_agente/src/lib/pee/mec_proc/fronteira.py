@@ -2,31 +2,24 @@ from abc import ABC, abstractmethod
 
 class Fronteira(ABC):
     """
-    Classe abstrata que define uma fronteira para armazenar nós durante a pesquisa.
-
-    Métodos Abstratos:
-        inserir(no): Método abstrato para inserir um nó na fronteira.
+    Classe abstrata que define uma fronteira para armazenar nós de busca.
 
     Attributes:
-        _nos: Uma estrutura de dados para armazenar os nós na fronteira.
-
-    Propriedades:
-        vazia: Retorna True se a fronteira estiver vazia, False caso contrário.
-        dimensao: Retorna a dimensão da estrutura de nós (fronteira).
+        _nos (list): Uma lista para armazenar nós de busca.
 
     Métodos:
-        iniciar(): Método para iniciar a fronteira.
-        remover(): Método para remover e retornar um nó da fronteira.
-
-    Nota:
-        O método abstrato `inserir` deve ser implementado.
+        vazia: Propriedade que verifica se a fronteira está vazia.
+        dimensao: Propriedade que retorna a dimensão (tamanho) da fronteira.
+        iniciar: Método para inicializar a fronteira.
+        inserir: Método abstrato para inserir um nó na fronteira.
+        remover: Método para remover um nó da fronteira.
     """
 
     def __init__(self):
         """
-        Inicializa a fronteira.
+        Inicializa a fronteira com uma lista vazia de nós.
         """
-        self._nos
+        self._nos = []
 
     @property
     def vazia(self):
@@ -41,32 +34,32 @@ class Fronteira(ABC):
     @property
     def dimensao(self):
         """
-        Retorna a dimensão da estrutura de nós (fronteira).
+        Retorna a dimensão (tamanho) da fronteira.
 
         Returns:
-            A dimensão da estrutura de nós.
+            O tamanho da fronteira.
         """
         return len(self._nos)
-    
+
     def iniciar(self):
         """
-        Inicia a fronteira.
+        Inicializa a fronteira. Método a ser implementado pelas subclasses, se necessário.
         """
         pass
-    
+
     @abstractmethod
     def inserir(self, no):
         """
-        Insere um nó na fronteira.
+        Insere um nó na fronteira. Método abstrato a ser implementado pelas subclasses.
 
         Args:
             no: O nó a ser inserido na fronteira.
         """
         pass
-    
+
     def remover(self):
         """
-        Remove e retorna um nó da fronteira.
+        Remove um nó da fronteira.
 
         Returns:
             O nó removido da fronteira.
