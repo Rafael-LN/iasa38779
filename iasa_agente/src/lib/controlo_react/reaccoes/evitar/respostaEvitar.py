@@ -1,6 +1,5 @@
 from random import choice
 from controlo_react.reaccoes.resposta.respostaMover import RespostaMover
-from sae.agente.accao import Accao
 from sae.ambiente.direccao import Direccao
 
 
