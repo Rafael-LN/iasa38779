@@ -1,5 +1,4 @@
 from abc import ABC, abstractmethod
-
 from pee.mec_proc.no import No
 
 class MecanismoProcura(ABC):
@@ -52,9 +51,14 @@ class MecanismoProcura(ABC):
 
     def _iniciar_memoria(self):
         """
-        Inicializa a memória de busca. Método a ser implementado pelas subclasses, se necessário.
+            Inicia as estruturas de memória de procura de acordo com o tipo de procura,
+            incluindo a fronteira de exploração.
         """
-        pass
+        # Reinicia o contador de nós processados
+        self.__nos_processados = 0
+
+        # Inicializa a fronteira de exploração de acordo com o tipo de procura
+        self._fronteira.iniciar()
 
     @abstractmethod
     def _memorizar(self, no):
@@ -68,12 +72,44 @@ class MecanismoProcura(ABC):
 
     def procurar(self, problema):
         """
-        Realiza a procura do problema. Método abstrato a ser implementado pelas subclasses.
+        Realiza a procura do problema.
 
         Args:
             problema: O problema a ser resolvido.
+
+        Retorno:
+            O nó de solução encontrado ou None se a solução não for encontrada.
         """
-        pass
+         # Inicializa as estruturas de memória de procura
+        self.iniciar_memoria()
+
+        # Insere o nó inicial na fronteira de exploração
+        no_inicial = No(problema.estado_inicial)
+        self._fronteira.inserir(no_inicial)
+
+        # Enquanto a fronteira não estiver vazia
+        while not self._fronteira.vazia:
+            # Remove o próximo nó da fronteira para expansão
+            no = self._fronteira.remover()
+
+            # Verifica se o nó é um objetivo
+            if problema.objectivo(no.estado):
+                # Se sim, retorna o nó de solução
+                return no
+
+            # Expande o nó atual e adiciona os nós sucessores na fronteira
+            sucessores = self._expandir(problema, no)
+            for suc in sucessores:
+                self._fronteira.inserir(suc)
+
+            # Memoriza o nó atual
+            self._memorizar(no)
+
+            # Incrementa o contador de nós processados
+            self.__nos_processados += 1
+
+        # Se a fronteira ficar vazia e nenhum objetivo for encontrado, retorna None
+        return None
 
     def _expandir(self, problema, no):
         """

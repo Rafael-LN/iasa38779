@@ -1,4 +1,4 @@
-from pee.mec_proc.procura_grafo import ProcuraGrafo
+from pee.larg.procura_grafo import ProcuraGrafo
 
 
 class ProcuraLargura(ProcuraGrafo):
