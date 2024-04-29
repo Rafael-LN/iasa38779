@@ -1,4 +1,4 @@
-from controlo_react.reaccoes.aproximar.aproximarDir import AproximarDir
+from controlo_react.reaccoes.aproximar.aproximar_dir import AproximarDir
 from ecr.prioridade import Prioridade
 from sae.ambiente.direccao import Direccao
 

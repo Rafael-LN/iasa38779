@@ -1,4 +1,4 @@
-from controlo_react.reaccoes.evitar.estimuloObst import EstimuloObst
+from agente.controlo_react.reaccoes.evitar.estimulo_obst import EstimuloObst
 from ecr.reaccao import Reaccao
 
 

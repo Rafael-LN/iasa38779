@@ -1,4 +1,4 @@
-from pee.mec_proc.mecanismoProcura import MecanismoProcura
+from pee.mec_proc.mecanismo_procura import MecanismoProcura
 
 class ProcuraProfundidade(MecanismoProcura):
     def __init__(self):

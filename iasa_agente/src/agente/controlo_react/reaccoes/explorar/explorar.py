@@ -1,5 +1,5 @@
 from random import choice
-from controlo_react.reaccoes.resposta.respostaMover import RespostaMover
+from agente.controlo_react.reaccoes.resposta.resposta_mover import RespostaMover
 from ecr.comportamento import Comportamento
 from sae.ambiente.direccao import Direccao
 

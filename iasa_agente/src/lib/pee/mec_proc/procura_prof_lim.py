@@ -1,5 +1,5 @@
 from pee.mec_proc.no import No
-from pee.mec_proc.procuraProfundidade import ProcuraProfundidade
+from pee.mec_proc.procura_profundidade import ProcuraProfundidade
 
 class ProcuraProfLim(ProcuraProfundidade):
     """

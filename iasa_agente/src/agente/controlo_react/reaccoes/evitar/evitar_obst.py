@@ -1,5 +1,5 @@
-from controlo_react.reaccoes.evitar.evitarDir import EvitarDir
-from controlo_react.reaccoes.evitar.respostaEvitar import RespostaEvitar
+from agente.controlo_react.reaccoes.evitar.evitar_dir import EvitarDir
+from controlo_react.reaccoes.evitar.resposta_evitar import RespostaEvitar
 from ecr.hierarquia import Hierarquia
 from sae.ambiente.direccao import Direccao
 

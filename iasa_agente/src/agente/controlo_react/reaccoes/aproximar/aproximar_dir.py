@@ -1,5 +1,5 @@
-from controlo_react.reaccoes.aproximar.estimuloAlvo import EstimuloAlvo
-from controlo_react.reaccoes.resposta.respostaMover import RespostaMover
+from controlo_react.reaccoes.aproximar.estimulo_alvo import EstimuloAlvo
+from controlo_react.reaccoes.resposta.resposta_mover import RespostaMover
 from ecr.reaccao import Reaccao
 
 

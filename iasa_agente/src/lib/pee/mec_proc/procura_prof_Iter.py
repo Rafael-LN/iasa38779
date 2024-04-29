@@ -1,4 +1,4 @@
-from pee.mec_proc.procuraProfLim import ProcuraProfLim
+from pee.mec_proc.procura_prof_lim import ProcuraProfLim
 
 
 class ProcuraProfIter(ProcuraProfLim):
