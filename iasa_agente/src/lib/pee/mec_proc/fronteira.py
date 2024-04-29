@@ -4,7 +4,7 @@ class Fronteira(ABC):
     """
     Classe abstrata que define uma fronteira para armazenar nós de busca.
 
-    Attributes:
+    Atributos:
         _nos (list): Uma lista para armazenar nós de busca.
 
     Métodos:
@@ -26,7 +26,7 @@ class Fronteira(ABC):
         """
         Verifica se a fronteira está vazia.
 
-        Returns:
+        Retorno:
             True se a fronteira estiver vazia, False caso contrário.
         """
         return len(self._nos) == 0
@@ -36,7 +36,7 @@ class Fronteira(ABC):
         """
         Retorna a dimensão (tamanho) da fronteira.
 
-        Returns:
+        Retorno:
             O tamanho da fronteira.
         """
         return len(self._nos)
@@ -61,7 +61,13 @@ class Fronteira(ABC):
         """
         Remove um nó da fronteira.
 
-        Returns:
+        Retorno:
             O nó removido da fronteira.
         """
-        pass
+         # Verifique se a fronteira não está vazia antes de tentar remover um nó.
+        if not self.vazia:
+            # Remova e retorne o primeiro nó da fronteira.
+            return self._nos.pop(0)
+        else:
+            # Se a fronteira estiver vazia, retorne None ou levante uma exceção, dependendo do comportamento desejado.
+            return None

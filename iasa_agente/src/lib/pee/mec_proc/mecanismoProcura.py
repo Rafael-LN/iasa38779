@@ -1,10 +1,12 @@
 from abc import ABC, abstractmethod
 
+from pee.mec_proc.no import No
+
 class MecanismoProcura(ABC):
     """
     Classe abstrata que define um mecanismo de procura para resolver problemas.
 
-    Attributes:
+    Atributos:
         _fronteira: A fronteira para armazenar nós de busca.
         __nos_processados: O número de nós processados durante a procura.
 
@@ -43,7 +45,7 @@ class MecanismoProcura(ABC):
         """
         Obtém o número máximo de nós em memória.
 
-        Returns:
+        Retorno:
             O número máximo de nós em memória.
         """
         pass
@@ -80,5 +82,17 @@ class MecanismoProcura(ABC):
         Args:
             problema: O problema a ser resolvido.
             no: O nó a ser expandido durante a procura.
+
+        Retorno:
+            Uma lista de nós sucessores gerados pela expansão do nó atual.
         """
-        pass
+        sucessores = []  # Lista para armazenar os nós sucessores
+        # Implementação genérica para expandir um nó
+        estado = no.estado
+        for operador in problema.operadores:
+            estado_suc = operador.aplicar(estado)
+            if estado_suc is not None:
+                custo = no.custo + operador.custo(estado, estado_suc)
+                no_successor = No(estado_suc, operador, no, custo)
+                sucessores.append(no_successor)
+        return sucessores
