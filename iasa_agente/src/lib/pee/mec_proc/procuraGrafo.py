@@ -35,7 +35,7 @@ class ProcuraGrafo(MecanismoProcura):
         Args:
             no: O nó a ser verificado.
 
-        Returns:
+        Retorno:
             True se o nó deve ser mantido, False caso contrário.
         """
         return no in self._explorados
@@ -44,7 +44,7 @@ class ProcuraGrafo(MecanismoProcura):
         """
         Retorna o número de nós na memória.
 
-        Returns:
+        Retorno:
             O número de nós na memória.
         """
         return len(self._nos_processados)

@@ -34,7 +34,7 @@ class MecanismoProcura(ABC):
         """
         Obtém o número de nós processados durante a procura.
 
-        Returns:
+        Retorno:
             O número de nós processados durante a procura.
         """
         return self.__nos_processados

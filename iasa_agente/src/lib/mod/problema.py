@@ -31,7 +31,7 @@ class Problema(ABC):
         Args:
             estado: O estado a ser verificado.
 
-        Returns:
+        Retorno:
             True se o estado atinge o objetivo do problema, False caso contrário.
         """
         pass

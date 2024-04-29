@@ -20,7 +20,7 @@ class No:
         """
         Retorna o custo associado a este nó.
 
-        Returns:
+        Retorno:
             O custo associado a este nó.
         """
         return self._custo
@@ -30,7 +30,7 @@ class No:
         """
         Retorna a profundidade deste nó na árvore de busca.
 
-        Returns:
+        Retorno:
             A profundidade deste nó na árvore de busca.
         """
         return self._profundidade
@@ -40,7 +40,7 @@ class No:
         """
         Retorna o nó antecessor que leva a este nó.
 
-        Returns:
+        Retorno:
             O nó antecessor que leva a este nó.
         """
         return self._antecessor
@@ -52,7 +52,7 @@ class No:
         Args:
             outro: O outro nó a ser comparado.
 
-        Returns:
+        Retorno:
             True se os nós forem iguais, False caso contrário.
         """
         return self.estado == outro.estado and self.operador == outro.operador \
@@ -66,7 +66,7 @@ class No:
         Args:
             outro: O outro nó a ser comparado.
 
-        Returns:
+        Retorno:
             True se os nós forem diferentes, False caso contrário.
         """
         return not self.__eq__(outro)
@@ -78,7 +78,7 @@ class No:
         Args:
             outro: O outro nó a ser comparado.
 
-        Returns:
+        Retorno:
             True se este nó for menor que o outro, False caso contrário.
         """
         return (self.custo, self.profundidade) < (outro.custo, outro.profundidade)
@@ -90,7 +90,7 @@ class No:
         Args:
             outro: O outro nó a ser comparado.
 
-        Returns:
+        Retorno:
             True se este nó for menor ou igual ao outro, False caso contrário.
         """
         return (self.custo, self.profundidade) <= (outro.custo, outro.profundidade)
@@ -102,7 +102,7 @@ class No:
         Args:
             outro: O outro nó a ser comparado.
 
-        Returns:
+        Retorno:
             True se este nó for maior que o outro, False caso contrário.
         """
         return (self.custo, self.profundidade) > (outro.custo, outro.profundidade)
@@ -114,7 +114,7 @@ class No:
         Args:
             outro: O outro nó a ser comparado.
 
-        Returns:
+        Retorno:
             True se este nó for maior ou igual ao outro, False caso contrário.
         """
         return (self.custo, self.profundidade) >= (outro.custo, outro.profundidade)

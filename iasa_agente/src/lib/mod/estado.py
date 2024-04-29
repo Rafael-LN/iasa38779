@@ -20,7 +20,7 @@ class Estado(ABC):
         """
         Retorna um identificador único para o estado.
 
-        Returns:
+        Retorno:
             Um identificador único para o estado.
         """
         pass
@@ -32,7 +32,7 @@ class Estado(ABC):
         Args:
             outro: O outro estado a ser comparado.
 
-        Returns:
+        Retorno:
             True se os estados forem iguais, False caso contrário.
         """
         return isinstance(outro, Estado) and self.id_valor() == outro.id_valor()
@@ -41,7 +41,7 @@ class Estado(ABC):
         """
         Retorna o hash do estado.
 
-        Returns:
+        Retorno:
             O hash do estado.
         """
         return hash(self.id_valor())

@@ -17,7 +17,7 @@ class Explorar(Comportamento):
         Args:
             percepcao: Percepção atual do ambiente pelo agente.
             
-        Returns:
+        Retorno:
             Resposta à percepção, que neste caso é uma RespostaMover com uma direção aleatória.
         """
         direcao = choice([direccao for direccao in Direccao])  # Escolhe aleatoriamente uma direção entre as disponíveis

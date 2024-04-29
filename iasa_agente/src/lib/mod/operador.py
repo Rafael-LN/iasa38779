@@ -20,7 +20,7 @@ class Operador(ABC):
         Args:
             estado: O estado atual.
 
-        Returns:
+        Retorno:
             O novo estado resultante após a aplicação do operador.
         """
         pass
@@ -34,7 +34,7 @@ class Operador(ABC):
             estado: O estado atual.
             estado_suc: O estado sucessor após a aplicação do operador.
 
-        Returns:
+        Retorno:
             O custo associado ao operador ao transitar de um estado para outro.
         """
         pass

@@ -24,7 +24,7 @@ class ComportComp(Comportamento):
         Args:
             percepcao: A percepção atual do agente.
             
-        Returns:
+        Retorno:
             Ação selecionada com base na percepção e nos comportamentos individuais ativos.
         """
         # Ativa cada comportamento individual e filtra os comportamentos que contêm uma acção
@@ -42,7 +42,7 @@ class ComportComp(Comportamento):
         Args:
             accoes (list): Lista de ações disponíveis para seleção.
         
-        Returns:
+        Retorno:
             Ação selecionada com base nas ações disponíveis.
         """
         pass

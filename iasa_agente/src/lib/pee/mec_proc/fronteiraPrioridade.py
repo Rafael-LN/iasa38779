@@ -35,7 +35,7 @@ class FronteiraPrioridade(Fronteira):
         """
         Remove e retorna o nó com a maior prioridade da fronteira.
 
-        Returns:
+        Retorno:
             O nó com a maior prioridade na fronteira.
         """
         return heappop(self._nos)

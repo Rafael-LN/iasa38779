@@ -25,7 +25,7 @@ class EstimuloAlvo(Estimulo):
         Args:
             percepcao (list): Percepção atual do ambiente.
         
-        Returns:
+        Retorno:
             O valor do estímulo associado à presença do alvo na direção especificada, ou 0 se o alvo não estiver presente.
         """
         return percepcao[1] ** self.__gama if percepcao[self.__direccao] == Elemento.ALVO else 0

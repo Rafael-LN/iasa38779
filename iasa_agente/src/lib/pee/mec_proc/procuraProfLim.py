@@ -25,7 +25,7 @@ class ProcuraProfLim(ProcuraProfundidade):
         """
         Propriedade para obter a profundidade máxima de busca.
 
-        Returns:
+        Retorno:
             A profundidade máxima de busca.
         """
         return self._prof_max
@@ -48,7 +48,7 @@ class ProcuraProfLim(ProcuraProfundidade):
             problema: O problema a ser resolvido.
             no: O nó a ser expandido durante a procura.
 
-        Returns:
+        Retorno:
             Uma lista de nós sucessores gerados pela expansão do nó atual.
         """
         sucessores = []
