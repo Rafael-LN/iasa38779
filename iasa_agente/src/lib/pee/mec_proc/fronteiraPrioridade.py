@@ -5,7 +5,7 @@ class FronteiraPrioridade(Fronteira):
     """
     Classe que define uma fronteira de prioridade para armazenar nós de busca, onde o critério de prioridade é determinado por um avaliador.
 
-    Attributes:
+    Atributos:
         __avaliador: O avaliador utilizado para determinar a prioridade dos nós.
 
     Métodos:

@@ -4,7 +4,7 @@ class Problema(ABC):
     """
     Classe abstrata que define um problema a ser resolvido.
 
-    Attributes:
+    Atributos:
         estado_inicial: O estado inicial do problema.
         operadores: Uma lista de operadores disponíveis para resolver o problema.
 
