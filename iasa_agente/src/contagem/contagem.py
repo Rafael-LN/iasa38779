@@ -13,3 +13,4 @@ problema = # Instanciar o problema
 
 # Nome da classe: mec_proc.__class__.__name__
 # Mostrar resultados: print()
+# solucao será: [passo.operador.incremento for passo in solucao]

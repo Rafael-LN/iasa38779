@@ -12,7 +12,7 @@ class MecanismoProcura(ABC):
     Métodos:
         nos_processados: Propriedade para obter o número de nós processados.
         nos_memoria: Propriedade abstrata para obter o número máximo de nós em memória.
-        _iniciar_memoria: Método para inicializar a memória de busca.
+        iniciar_memoria: Método para inicializar a memória de busca.
         _memorizar: Método abstrato para memorizar um nó durante a procura.
         procurar: Método abstrato para realizar a procura do problema.
         _expandir: Método para expandir um nó durante a procura.
@@ -49,10 +49,10 @@ class MecanismoProcura(ABC):
         """
         pass
 
-    def _iniciar_memoria(self):
+    def iniciar_memoria(self):
         """
-            Inicia as estruturas de memória de procura de acordo com o tipo de procura,
-            incluindo a fronteira de exploração.
+        Inicia as estruturas de memória de procura de acordo com o tipo de procura,
+        incluindo a fronteira de exploração.
         """
         # Reinicia o contador de nós processados
         self.__nos_processados = 0
@@ -80,7 +80,7 @@ class MecanismoProcura(ABC):
         Retorno:
             O nó de solução encontrado ou None se a solução não for encontrada.
         """
-         # Inicializa as estruturas de memória de procura
+        # Inicializa as estruturas de memória de procura
         self.iniciar_memoria()
 
         # Insere o nó inicial na fronteira de exploração
