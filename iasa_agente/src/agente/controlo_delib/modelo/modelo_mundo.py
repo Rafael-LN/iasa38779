@@ -112,9 +112,6 @@ class ModeloMundo(ModeloPlan):
         if estado in self.__estados:
             # Calcula a distância entre os estados usando dist
             return dist(estado, self.__estado)
-        else:
-            # Se o estado especificado não estiver presente no modelo do mundo, retorna None
-            return None
     
     def actualizar(self, percepcao):
         """
