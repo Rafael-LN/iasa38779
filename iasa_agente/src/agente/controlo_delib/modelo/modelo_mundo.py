@@ -1,8 +1,8 @@
 from math import dist
-from mod.operador import Operador
+from plan.modelo.modelo_plan import ModeloPlan
 from sae.ambiente.elemento import Elemento
 
-class ModeloMundo(Operador):
+class ModeloMundo(ModeloPlan):
     """
     Classe que representa o modelo do mundo.
 
