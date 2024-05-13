@@ -42,7 +42,7 @@ class PlanoPEE(Plano):
     
     def mostrar(self, vista):
         """
-        Mostra visualmente os passos do plano de execução em uma vista.
+        Mostra visualmente os passos do plano de execução de uma vista.
 
         Args:
             vista: A vista na qual mostrar os passos do plano.
