@@ -1,3 +1,6 @@
+from sae.ambiente.elemento import Elemento
+
+
 class MecDelib():
     """
     Classe que representa um mecanismo de deliberação.
@@ -37,7 +40,7 @@ class MecDelib():
         Retorno:
             Uma lista de objetivos a serem alcançados.
         """
-        pass
+        return [estado for estado in self.__modelo_mundo.obter_estados()]
     
     def seleccionar_objectivos(self, objectivos):
         """
@@ -49,4 +52,4 @@ class MecDelib():
         Retorno:
             Uma lista de objetivos ordenados para perseguição.
         """
-    pass
+        return objectivos.sort(key=self.__modelo_mundo.distancia)
