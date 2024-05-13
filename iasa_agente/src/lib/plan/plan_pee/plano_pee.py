@@ -1,4 +1,7 @@
-class PlanoPEE():
+from plan.plano import Plano
+
+
+class PlanoPEE(Plano):
     def __init__(self, solucao):
         self.__passos = [passo for passo in solucao]
         
