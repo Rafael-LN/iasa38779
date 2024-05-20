@@ -1,7 +1,7 @@
 from pdm.mec_util import MecUtil
 
 
-class PDM():
+class PDM:
     def __init__(self, modelo, gama, delta_max):
         self.__modelo = modelo
         self.__mec_util = MecUtil(modelo, gama, delta_max)
@@ -10,4 +10,5 @@ class PDM():
         pass
     
     def resolver(self):
-        pass
+        U = self.__mec_util.utilidade()
+        return U, self.politica(U)
