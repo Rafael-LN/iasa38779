@@ -1,5 +1,5 @@
+from math import cos, dist, sin
 from agente.controlo_delib.modelo.estado_agente import EstadoAgente
-
 
 class OperadorMover():
     def __init__(self, modelo_mundo, direccao):
@@ -42,19 +42,17 @@ class OperadorMover():
         Retorno:
             O novo estado resultante da aplicação do operador de mover, se válido; caso contrário, None.
         """
+        
         # Fazer a translação para obter a nova posição
-        nova_posicao = self.__translacao(estado.posicao, distancia=1, angulo=self.__direccao)
+        nova_posicao = self.__translacao(estado.posicao, self.__modelo_mundo.distancia(estado), self.ang)
     
         # Criar um estado agente para a nova posição
-        novo_estado = EstadoAgente(nova_posicao)  # Supondo que haja uma classe Estado que represente o estado do agente
+        novo_estado = EstadoAgente(nova_posicao)
     
         # Validar se o estado é válido:
         if novo_estado in self.__modelo_mundo.obter_estados():
             # Se esse estado for um estado do modelo do mundo, então retorna esse estado
             return novo_estado
-        else:
-            # Caso contrário, retorna None
-            return None
 
     
     def custo(self, estado, estado_suc):
@@ -68,7 +66,7 @@ class OperadorMover():
         Retorno:
             O custo de aplicar o operador de mover do estado inicial ao estado sucessor.
         """
-        return self.__modelo_mundo.distancia(estado_suc)
+        return dist(estado_suc.posicao, estado.posicao)
     
     def __translacao(self, posicao, distancia, angulo):
         """
@@ -82,5 +80,10 @@ class OperadorMover():
         Retorno:
             A nova posição resultante da translação.
         """
-        # return Posicao
-        pass
+        x, y = posicao  # Extrai as coordenadas x e y da posição inicial
+
+        # Calcula as novas coordenadas após a translação
+        dx = x + distancia * cos(angulo)
+        dy = y + (-1 * distancia) * sin(angulo)
+        
+        return (dx, dy)
