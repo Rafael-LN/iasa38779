@@ -9,6 +9,7 @@ class EstadoAgente(Estado):
             posicao: A posição do agente no ambiente.
         """
         self.__posicao = posicao
+        self.__id_valor = hash(self.__posicao)
         
     @property
     def posicao(self):
@@ -29,4 +30,4 @@ class EstadoAgente(Estado):
         Retorno:
             O identificador da posição do agente.
         """
-        pass
+        return self.__id_valor
