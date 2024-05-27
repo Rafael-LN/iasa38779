@@ -2,38 +2,37 @@ from plan.plano import Plano
 
 class PlanoPEE(Plano):
     """
-    Classe que representa um plano de execução para um Problema de Estado Espaço.
-
-    Esta classe estende a classe abstrata Plano e é projetada para representar um plano específico para resolver
-    um Problema de Estado Espaço.
+    A classe PlanoPEE representa um plano baseado em uma sequência de passos (solução) gerados por um algoritmo de planeamento.
 
     Atributos:
-        __passos: Uma lista de passos que compõem o plano de execução.
+        __passos (list): Lista de passos que compõem a solução do plano.
 
     Métodos:
-        __init__: Inicializa o plano de execução com a solução fornecida.
-        obter_accao: Obtém a próxima ação do plano de execução com base no estado atual.
-        mostrar: Mostra visualmente os passos do plano de execução em uma vista.
+        __init__(self, solucao): Inicializa a instância da classe com a solução fornecida.
+        obter_accao(self, estado): Retorna a ação a ser tomada para um determinado estado, removendo o passo correspondente da lista.
+        mostrar(self, vista): Exibe os passos do plano como vetores em uma determinada visão.
     """
 
     def __init__(self, solucao):
         """
-        Inicializa o plano de execução com a solução fornecida.
+        Inicializa uma instância da classe PlanoPEE.
 
-        Args:
-            solucao: A solução gerada para o problema, consistindo em uma sequência de passos.
+        Parâmetros:
+            solucao (list): Lista de passos que compõem a solução do plano.
+
+        Este método inicializa o atributo __passos com os passos fornecidos na solução.
         """
         self.__passos = [passo for passo in solucao]
         
     def obter_accao(self, estado):
         """
-        Obtém a próxima ação do plano de execução com base no estado atual.
+        Retorna a ação a ser tomada para um determinado estado.
 
-        Args:
-            estado: O estado atual do sistema.
+        Parâmetros:
+            estado: O estado atual para o qual se deseja obter a ação.
 
-        Returns:
-            A próxima ação a ser executada, se houver, ou None caso o plano tenha sido concluído.
+        Retorna:
+            Operador correspondente ao estado atual, removido da lista de passos.
         """
         if self.__passos:
             passo = self.__passos.pop()
@@ -42,12 +41,13 @@ class PlanoPEE(Plano):
     
     def mostrar(self, vista):
         """
-        Mostra visualmente os passos do plano de execução de uma vista.
+        Exibe os passos do plano como vetores em uma determinada visão.
 
-        Args:
-            vista: A vista na qual mostrar os passos do plano.
+        Parâmetros:
+            vista: A visão ou contexto em que o plano deve ser apresentado.
+
+        Este método utiliza a visão fornecida para exibir os vetores dos passos do plano.
         """
         if self.__passos:
-            # Mostrar passos do plano como vetores
             for passo in self.__passos:
                 vista.mostrar_vector(passo.estado.posicao, passo.operador.ang)
