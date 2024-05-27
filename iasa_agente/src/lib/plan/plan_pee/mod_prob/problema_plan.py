@@ -2,40 +2,37 @@ from mod.problema import Problema
 
 class ProblemaPlan(Problema):
     """
-    Classe que define um problema de planeamento para sistemas autónomos.
-
-    Esta classe estende a classe abstrata Problema e é projetada para representar um problema específico de planeamento
-    para um sistema autónomo.
+    A classe ProblemaPlan estende a classe Problema e representa um problema de planeamento que utiliza um modelo de planeamento e define um estado final objetivo.
 
     Atributos:
-        estado_inicial: O estado inicial do problema de planeamento.
-        operadores: Uma lista de operadores disponíveis para resolver o problema.
-        estado_final: O estado final desejado que indica a condição de sucesso do problema.
+        __estado_final: Estado que representa o objetivo final do problema.
 
     Métodos:
-        __init__: Inicializa o problema de planeamento com o estado inicial, operadores e estado final.
-        objectivo: Verifica se um estado atinge o objetivo do problema de planeamento.
+        __init__(self, modelo_plan, estado_final): Inicializa a instância da classe com o modelo de planeamento e o estado final objetivo.
+        objectivo(self, estado): Verifica se um estado é o estado final objetivo.
     """
 
     def __init__(self, modelo_plan, estado_final):
         """
-        Inicializa um problema de planeamento com o modelo de planeamento, estado final e operadores.
+        Inicializa uma instância da classe ProblemaPlan.
 
-        Args:
-            modelo_plan: O modelo de planeamento utilizado para o problema.
-            estado_final: O estado final desejado que indica a condição de sucesso do problema.
+        Parâmetros:
+            modelo_plan: Instância do modelo de planeamento que define os estados e operadores.
+            estado_final: Estado que representa o objetivo final do problema.
+
+        Este método inicializa a classe base Problema com o estado inicial (o primeiro estado do conjunto de estados) e os operadores do modelo de planeamento.
         """
         super().__init__(modelo_plan.obter_estados().pop(0), modelo_plan.obter_operadores())
         self.__estado_final = estado_final
         
     def objectivo(self, estado):
         """
-        Verifica se um determinado estado atinge o objetivo do problema de planeamento.
+        Verifica se um estado é o estado final objetivo.
 
-        Args:
+        Parâmetros:
             estado: O estado a ser verificado.
 
-        Returns:
-            True se o estado atinge o objetivo do problema de planeamento, False caso contrário.
+        Retorna:
+            bool: True se o estado for o estado final objetivo, caso contrário, False.
         """
         return estado == self.__estado_final
