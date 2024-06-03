@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 from pee.mec_proc.no import No
+from pee.mec_proc.solucao import Solucao
 
 class MecanismoProcura(ABC):
     """
@@ -90,20 +91,20 @@ class MecanismoProcura(ABC):
         # Enquanto a fronteira não estiver vazia
         while not self._fronteira.vazia:
             # Remove o próximo nó da fronteira para expansão
-            no = self._fronteira.remover()
+            no_atual = self._fronteira.remover()
 
             # Verifica se o nó é um objetivo
-            if problema.objectivo(no.estado):
+            if problema.objectivo(no_atual.estado):
                 # Se sim, retorna o nó de solução
-                return no
+                return Solucao(no_atual)
 
             # Expande o nó atual e adiciona os nós sucessores na fronteira
-            sucessores = self._expandir(problema, no)
+            sucessores = self._expandir(problema, no_atual)
             for suc in sucessores:
                 self._fronteira.inserir(suc)
 
             # Memoriza o nó atual
-            self._memorizar(no)
+            self._memorizar(no_atual)
 
             # Incrementa o contador de nós processados
             self.__nos_processados += 1
@@ -123,12 +124,10 @@ class MecanismoProcura(ABC):
             Uma lista de nós sucessores gerados pela expansão do nó atual.
         """
         sucessores = []  # Lista para armazenar os nós sucessores
-        # Implementação genérica para expandir um nó
-        estado = no.estado
         for operador in problema.operadores:
-            estado_suc = operador.aplicar(estado)
+            estado_suc = operador.aplicar(no.estado)
             if estado_suc is not None:
-                custo = no.custo + operador.custo(estado, estado_suc)
-                no_successor = No(estado_suc, operador, no, custo)
+                custo = no.custo + operador.custo(no.estado, estado_suc)
+                no_successor = No(no.estado, operador, no, custo)
                 sucessores.append(no_successor)
         return sucessores
