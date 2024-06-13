@@ -1,4 +1,5 @@
 from math import dist
+from agente.controlo_delib.modelo.estado_agente import EstadoAgente
 from plan.modelo.modelo_plan import ModeloPlan
 from sae.ambiente.elemento import Elemento
 
@@ -118,12 +119,14 @@ class ModeloMundo(ModeloPlan):
         Argumentos:
             percepcao: A percepção recebida do ambiente.
         """
-        self.__estado = percepcao.estado_agente
+        self.__estado = EstadoAgente(percepcao.posicao)
 
-        for posicao, elemento in percepcao.elementos.items():
-            self.__elementos[posicao] = elemento
-
-        self.alterado = True
+        if self.__elementos != percepcao.elementos:
+            self.__elementos = percepcao.elementos
+            self.__estados = [EstadoAgente(posicao) for posicao in percepcao.posicoes]
+            self.__alterado = True
+        else:
+            self.__alterado = False
 
     def mostrar(self, vista):
         """

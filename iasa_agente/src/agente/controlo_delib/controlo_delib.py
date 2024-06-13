@@ -1,3 +1,5 @@
+from agente.controlo_delib.mec_delib import MecDelib
+from agente.controlo_delib.modelo.modelo_mundo import ModeloMundo
 from sae.agente.controlo import Controlo
 
 class ControloDelib(Controlo):
@@ -30,10 +32,10 @@ class ControloDelib(Controlo):
             planeador: O planeador a ser utilizado para deliberar e planear a ação do agente.
         """
         self.__objectivos = []  # Lista de objetivos do agente
-        self.__mec_delib = None  # Mecanismo de deliberação do agente
         self.__planeador = planeador  # Planeador utilizado para gerar planos de ação
+        self.__modelo_mundo = ModeloMundo()  # Modelo do mundo do agente
+        self.__mec_delib = MecDelib(self.__modelo_mundo)  # Mecanismo de deliberação do agente
         self.__plano = None  # Plano de ação gerado pelo planeador
-        self.__modelo_mundo = None  # Modelo do mundo do agente
         
     def processar(self, percepcao):
         """
@@ -45,8 +47,11 @@ class ControloDelib(Controlo):
         Retorno:
             A ação a ser executada pelo agente.
         """
-        #Return accao
-        pass
+        self.__assimilar(percepcao)
+        if self.__reconsiderar():
+            self.__deliberar()
+            self.__planear()
+        return self.__executar()
     
     def __assimilar(self, percepcao):
         """
@@ -64,21 +69,21 @@ class ControloDelib(Controlo):
         Retorno:
             True se o agente deve reconsiderar, False caso contrário.
         """
-        return self.__modelo_mundo.alterado
+        if self.__modelo_mundo.alterado or self.__plano == None:
+            return True
+        return False
     
     def __deliberar(self):
         """
         Delibera sobre os objetivos do agente e decide o que deve fazer em seguida.
         """
-        self.__mec_delib.deliberar()
+        self.__objectivos = self.__mec_delib.deliberar()
     
     def __planear(self):
         """
         Planeia uma sequência de ações para alcançar os objetivos do agente.
         """
-        # Se não houver objectivos colocar o plano a None
-        if len(self.__objectivos) == 0:
-            self.__plano = None
+        self.__plano = self.__planeador.planear(self.__modelo_mundo, self.__objectivos)
         
     
     def __executar(self):
@@ -88,8 +93,12 @@ class ControloDelib(Controlo):
         Retorno:
             A próxima ação a ser executada pelo agente.
         """
-        #return Accao
-        pass
+        if self.__plano:
+
+            operador = self.__plano.obter_accao(self.__modelo_mundo.obter_estado())
+
+            if operador:
+                return operador.accao
     
     def __mostrar(self):
         """

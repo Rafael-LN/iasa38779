@@ -1,4 +1,4 @@
-from abc import ABC
+from abc import ABC, abstractmethod
 
 class Planeador(ABC):
     """
@@ -6,4 +6,5 @@ class Planeador(ABC):
 
     Esta interface serve como base para a implementação de diferentes tipos de planeadores, proporcionando uma estrutura comum.
     """
-    pass
+    @abstractmethod
+    def planear(self, modelo_plan, objectivos): pass

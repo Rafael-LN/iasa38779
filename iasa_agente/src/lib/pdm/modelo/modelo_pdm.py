@@ -1,5 +1,4 @@
 from abc import ABC, abstractmethod
-from mod import Estado, Operador
 
 class ModeloPDM(ABC):
     """

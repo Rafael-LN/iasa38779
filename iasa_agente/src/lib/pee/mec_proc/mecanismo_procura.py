@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from pee.mec_proc.fronteira import Fronteira
 from pee.mec_proc.no import No
 from pee.mec_proc.solucao import Solucao
 
@@ -19,7 +20,7 @@ class MecanismoProcura(ABC):
         _expandir: Método para expandir um nó durante a procura.
     """
 
-    def __init__(self, fronteira):
+    def __init__(self, fronteira: Fronteira):
         """
         Inicializa o mecanismo de procura com a fronteira e o número de nós processados.
 
@@ -50,7 +51,7 @@ class MecanismoProcura(ABC):
         """
         pass
 
-    def iniciar_memoria(self):
+    def _iniciar_memoria(self):
         """
         Inicia as estruturas de memória de procura de acordo com o tipo de procura,
         incluindo a fronteira de exploração.
@@ -82,7 +83,7 @@ class MecanismoProcura(ABC):
             O nó de solução encontrado ou None se a solução não for encontrada.
         """
         # Inicializa as estruturas de memória de procura
-        self.iniciar_memoria()
+        self._iniciar_memoria()
 
         # Insere o nó inicial na fronteira de exploração
         no_inicial = No(problema.estado_inicial)

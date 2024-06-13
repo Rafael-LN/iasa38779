@@ -31,7 +31,8 @@ class MecDelib():
         Retorno:
             Uma lista de possíveis estados futuros com base na deliberação.
         """
-        pass
+        objectivos = self.gerar_objectivos()
+        return self.seleccionar_objectivos(objectivos)
     
     def gerar_objectivos(self):
         """
@@ -40,7 +41,7 @@ class MecDelib():
         Retorno:
             Uma lista de objetivos a serem alcançados.
         """
-        return [estado for estado in self.__modelo_mundo.obter_estados()]
+        return [estado for estado in self.__modelo_mundo.obter_estados() if self.__modelo_mundo.obter_elemento(estado) == Elemento.ALVO]
     
     def seleccionar_objectivos(self, objectivos):
         """

@@ -32,4 +32,7 @@ class ProcuraMelhorPrim(ProcuraGrafo):
         Returns:
             True se o nó deve ser mantido, False caso contrário.
         """
-        pass
+        if super()._manter(no):
+            return super()._manter(no) 
+        else:
+            return no.custo < self._explorados.get(no.estado).custo

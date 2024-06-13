@@ -45,7 +45,7 @@ class Fronteira(ABC):
         """
         Inicializa a fronteira. Método a ser implementado pelas subclasses, se necessário.
         """
-        pass
+        self._nos = []
 
     @abstractmethod
     def inserir(self, no):
