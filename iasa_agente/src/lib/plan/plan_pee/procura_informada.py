@@ -1,2 +1,0 @@
-class ProcuraInformada():
-    pass
