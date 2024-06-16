@@ -27,9 +27,9 @@ class ProcuraProfIter(ProcuraProfLim):
         Retorna:
             solucao: A solução encontrada para o problema, ou None se nenhuma solução for encontrada dentro do limite de profundidade.
         """
-        super().prof_max = 0  # Inicializa a profundidade máxima no método da classe base
+        self.prof_max = 0  # Inicializa a profundidade máxima no método da classe base
         for i in range(0, limite_prof, inc_prof):
-            super().prof_max = i
+            self.prof_max = i
             solucao = super().procurar(problema)
             if solucao:
                 return solucao

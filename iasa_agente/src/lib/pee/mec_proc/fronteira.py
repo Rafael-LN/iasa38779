@@ -19,8 +19,7 @@ class Fronteira(ABC):
         """
         Inicializa a fronteira com uma lista vazia de nós.
         """
-        self._nos = []
-
+        self.iniciar()
     @property
     def vazia(self):
         """

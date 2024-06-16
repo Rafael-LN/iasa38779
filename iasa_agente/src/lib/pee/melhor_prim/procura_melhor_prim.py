@@ -1,4 +1,5 @@
 from pee.larg.procura_grafo import ProcuraGrafo
+from pee.mec_proc.fronteira_prioridade import FronteiraPrioridade
 
 class ProcuraMelhorPrim(ProcuraGrafo):
     """
@@ -18,6 +19,7 @@ class ProcuraMelhorPrim(ProcuraGrafo):
         Args:
             avaliador: O avaliador a ser utilizado na procura.
         """
+        super().__init__(FronteiraPrioridade(avaliador))
         self._avaliador = avaliador
         
     def _manter(self, no):
@@ -32,7 +34,4 @@ class ProcuraMelhorPrim(ProcuraGrafo):
         Returns:
             True se o nó deve ser mantido, False caso contrário.
         """
-        if super()._manter(no):
-            return super()._manter(no) 
-        else:
-            return no.custo < self._explorados.get(no.estado).custo
+        return super()._manter(no) or no.custo < self._explorados.get(no.estado).custo

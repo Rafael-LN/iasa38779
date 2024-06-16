@@ -20,6 +20,7 @@ class FronteiraPrioridade(Fronteira):
         Args:
             avaliador: O avaliador utilizado para determinar a prioridade dos nós.
         """
+        super().__init__()
         self.__avaliador = avaliador
         
     def inserir(self, no):
@@ -29,7 +30,8 @@ class FronteiraPrioridade(Fronteira):
         Args:
             no: O nó a ser inserido na fronteira.
         """
-        heappush(self._nos, no)
+        prioridade = self.__avaliador.prioridade(no)
+        heappush(self._nos,(prioridade,no))
         
     def remover(self):
         """
@@ -38,4 +40,5 @@ class FronteiraPrioridade(Fronteira):
         Retorno:
             O nó com a maior prioridade na fronteira.
         """
-        return heappop(self._nos)
+        (_, no) = heappop(self._nos)
+        return no

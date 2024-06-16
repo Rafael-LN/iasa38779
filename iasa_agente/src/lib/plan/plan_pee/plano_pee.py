@@ -34,10 +34,25 @@ class PlanoPEE(Plano):
         Retorna:
             Operador correspondente ao estado atual, removido da lista de passos.
         """
-        if self.__passos:
-            passo = self.__passos.pop()
+        for passo in self.__passos:
             if passo.estado == estado:
                 return passo.operador
+        return None
+    
+    def validar_estado(self, estado):
+        """
+        Valida se um estado está presente no plano.
+
+        Args:
+            estado (Estado): O estado a ser validado.
+
+        Retorna:
+            bool: True se o estado está presente no plano, False caso contrário.
+        """
+        for passo in self.__passos:
+            if passo.estado == estado:
+                return True
+        return False
     
     def mostrar(self, vista):
         """

@@ -1,4 +1,5 @@
 from pee.mec_proc.mecanismo_procura import MecanismoProcura
+from pee.prof.fronteira_lifo import FronteiraLIFO
 
 class ProcuraProfundidade(MecanismoProcura):
     """
@@ -24,7 +25,7 @@ class ProcuraProfundidade(MecanismoProcura):
 
         Este método chama o construtor da classe base MecanismoProcura e inicializa o atributo __nos_mem_max com 0.
         """
-        super().__init__()
+        super().__init__(FronteiraLIFO())
         self.__nos_mem_max = 0
         
     def _memorizar(self, no):
@@ -36,6 +37,8 @@ class ProcuraProfundidade(MecanismoProcura):
         Parâmetros:
             no: O nó atual sendo processado.
         """
+        self._fronteira.inserir(no)
+        
         if self.dimensao > self.__nos_mem_max:
             self.__nos_mem_max = self.dimensao
         

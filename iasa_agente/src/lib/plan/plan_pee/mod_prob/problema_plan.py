@@ -22,7 +22,7 @@ class ProblemaPlan(Problema):
 
         Este método inicializa a classe base Problema com o estado inicial (o primeiro estado do conjunto de estados) e os operadores do modelo de planeamento.
         """
-        super().__init__(modelo_plan.obter_estados().pop(0), modelo_plan.obter_operadores())
+        super().__init__(modelo_plan.obter_estado(), modelo_plan.obter_operadores())
         self.__estado_final = estado_final
         
     def objectivo(self, estado):
@@ -35,4 +35,4 @@ class ProblemaPlan(Problema):
         Retorna:
             bool: True se o estado for o estado final objetivo, caso contrário, False.
         """
-        return estado == self.__estado_final
+        return estado.posicao == self.__estado_final.posicao

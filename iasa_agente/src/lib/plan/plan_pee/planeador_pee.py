@@ -23,7 +23,7 @@ class PlaneadorPEE(Planeador):
         Parâmetros:
             Nenhum.
         """
-        self.__mec_pee = ProcuraCustoUnif()
+        self.__mec_pee = None
         
     def planear(self, modelo_plan, objectivos):
         """
@@ -38,11 +38,16 @@ class PlaneadorPEE(Planeador):
         Retorna:
             PlanoPEE: Instância do plano de ação contendo a solução encontrada.
         """
+       
+        
         if objectivos:
-            estado_final = objectivos.pop(0)
+            estado_final = objectivos[0]
             problema = ProblemaPlan(modelo_plan, estado_final)
-            
             heuristica = HeurDist(estado_final)
+            self.__mec_pee = ProcuraMelhorPrim(heuristica)
             solucao = self.__mec_pee.procurar(problema, heuristica)
 
-            return PlanoPEE(solucao)
+            if solucao:
+                return PlanoPEE(solucao)
+            else:
+                return None

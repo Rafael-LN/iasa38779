@@ -18,7 +18,8 @@ class ProcuraProfLim(ProcuraProfundidade):
         Args:
             prof_max: A profundidade máxima de busca.
         """
-        self.prof_max = prof_max
+        self.__prof_max = prof_max
+        super().__init__()
         
     @property
     def prof_max(self):
@@ -28,7 +29,7 @@ class ProcuraProfLim(ProcuraProfundidade):
         Retorno:
             A profundidade máxima de busca.
         """
-        return self._prof_max
+        return self.__prof_max
 
     @prof_max.setter
     def prof_max(self, prof_max):
@@ -38,7 +39,7 @@ class ProcuraProfLim(ProcuraProfundidade):
         Args:
             prof_max: A profundidade máxima de busca.
         """
-        self._prof_max = prof_max
+        self.__prof_max = prof_max
     
     def _expandir(self, problema, no):
         """
@@ -51,13 +52,5 @@ class ProcuraProfLim(ProcuraProfundidade):
         Retorno:
             Uma lista de nós sucessores gerados pela expansão do nó atual.
         """
-        sucessores = []
-        if no.profundidade < self._prof_max:
-            estado = no.estado
-            for operador in problema.operadores:
-                estado_suc = operador.aplicar(estado)
-                if estado_suc is not None:
-                    custo = no.custo + operador.custo(estado, estado_suc)
-                    no_successor = No(estado_suc, operador, no, custo)
-                    sucessores.append(no_successor)
-        return sucessores
+        if no.profundidade < self.prof_max:
+           yield from super()._expandir(problema, no) 

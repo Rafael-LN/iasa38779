@@ -53,4 +53,4 @@ class MecDelib():
         Retorno:
             Uma lista de objetivos ordenados para perseguição.
         """
-        return objectivos.sort(key=self.__modelo_mundo.distancia)
+        return sorted(objectivos, key=lambda estado: self.__modelo_mundo.distancia(estado))

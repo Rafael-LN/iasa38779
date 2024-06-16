@@ -20,7 +20,7 @@ class MecanismoProcura(ABC):
         _expandir: Método para expandir um nó durante a procura.
     """
 
-    def __init__(self, fronteira: Fronteira):
+    def __init__(self, fronteira):
         """
         Inicializa o mecanismo de procura com a fronteira e o número de nós processados.
 
@@ -82,35 +82,19 @@ class MecanismoProcura(ABC):
         Retorno:
             O nó de solução encontrado ou None se a solução não for encontrada.
         """
-        # Inicializa as estruturas de memória de procura
-        self._iniciar_memoria()
-
-        # Insere o nó inicial na fronteira de exploração
+        self.iniciar_memoria()
         no_inicial = No(problema.estado_inicial)
-        self._fronteira.inserir(no_inicial)
-
-        # Enquanto a fronteira não estiver vazia
+        self._memorizar(no_inicial)
+        
         while not self._fronteira.vazia:
-            # Remove o próximo nó da fronteira para expansão
-            no_atual = self._fronteira.remover()
+            no = self._fronteira.remover()
+            if problema.objectivo(no.estado):
+                return Solucao(no)
+            else:
+                nos_suc = self._expandir(problema, no)
+                for no in nos_suc:
+                    self._memorizar(no)
 
-            # Verifica se o nó é um objetivo
-            if problema.objectivo(no_atual.estado):
-                # Se sim, retorna o nó de solução
-                return Solucao(no_atual)
-
-            # Expande o nó atual e adiciona os nós sucessores na fronteira
-            sucessores = self._expandir(problema, no_atual)
-            for suc in sucessores:
-                self._fronteira.inserir(suc)
-
-            # Memoriza o nó atual
-            self._memorizar(no_atual)
-
-            # Incrementa o contador de nós processados
-            self.__nos_processados += 1
-
-        # Se a fronteira ficar vazia e nenhum objetivo for encontrado, retorna None
         return None
 
     def _expandir(self, problema, no):
@@ -124,11 +108,8 @@ class MecanismoProcura(ABC):
         Retorno:
             Uma lista de nós sucessores gerados pela expansão do nó atual.
         """
-        sucessores = []  # Lista para armazenar os nós sucessores
         for operador in problema.operadores:
-            estado_suc = operador.aplicar(no.estado)
-            if estado_suc is not None:
-                custo = no.custo + operador.custo(no.estado, estado_suc)
-                no_successor = No(no.estado, operador, no, custo)
-                sucessores.append(no_successor)
-        return sucessores
+            estado_sucessor = operador.aplicar(no.estado)
+            if estado_sucessor is not None:
+                custo = no.custo + operador.custo(no.estado, estado_sucessor)
+                yield No(estado_sucessor, operador, no, custo)

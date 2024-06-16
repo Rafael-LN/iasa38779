@@ -16,7 +16,7 @@ class ProcuraGrafo(MecanismoProcura):
         Inicializa a memória para a procura.
         """
         super()._iniciar_memoria()
-        self._explorados = []
+        self._explorados = {}
 
     def _memorizar(self, no):
         """
@@ -25,8 +25,9 @@ class ProcuraGrafo(MecanismoProcura):
         Args:
             no: O nó a ser memorizado.
         """
-        if not self._manter(no):
-            self._explorados.append(no)
+        if self._manter(no):
+            self._explorados[no.estado] = no
+            self._fronteira.inserir(no)
 
     def _manter(self, no):
         """
@@ -38,7 +39,7 @@ class ProcuraGrafo(MecanismoProcura):
         Retorno:
             True se o nó deve ser mantido, False caso contrário.
         """
-        return no in self._explorados
+        return no.estado not in self._explorados
 
     def nos_memoria(self):
         """

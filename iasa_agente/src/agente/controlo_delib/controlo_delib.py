@@ -69,9 +69,7 @@ class ControloDelib(Controlo):
         Retorno:
             True se o agente deve reconsiderar, False caso contrário.
         """
-        if self.__modelo_mundo.alterado or self.__plano == None:
-            return True
-        return False
+        return self.__modelo_mundo.alterado or self.__plano is None
     
     def __deliberar(self):
         """

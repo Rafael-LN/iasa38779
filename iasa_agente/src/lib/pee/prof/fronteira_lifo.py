@@ -22,4 +22,4 @@ class FronteiraLIFO(Fronteira):
 
         Este método adiciona o nó ao final da lista interna de nós (_nos), garantindo que será o primeiro a ser retirado quando necessário.
         """
-        self._nos.append(no)
+        self._nos.insert(0, no)

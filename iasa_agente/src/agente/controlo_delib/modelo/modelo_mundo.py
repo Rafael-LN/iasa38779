@@ -1,6 +1,8 @@
 from math import dist
 from agente.controlo_delib.modelo.estado_agente import EstadoAgente
+from agente.controlo_delib.modelo.operador_mover import OperadorMover
 from plan.modelo.modelo_plan import ModeloPlan
+from sae.ambiente.direccao import Direccao
 from sae.ambiente.elemento import Elemento
 
 class ModeloMundo(ModeloPlan):
@@ -31,10 +33,10 @@ class ModeloMundo(ModeloPlan):
         """
         Inicializa o modelo do mundo.
         """
-        self.__operadores = []  # Lista de operadores disponíveis
-        self.__estado = 0  # Estado atual do modelo do mundo
+        self.__operadores = [OperadorMover(self, direcao) for direcao in Direccao]  # Lista de operadores disponíveis
+        self.__estado = None  # Estado atual do modelo do mundo
         self.__estados = []  # Lista de estados conhecidos
-        self.__elementos = {}  # Mapeamento de posição para elementos do ambiente
+        self.__elementos = dict()  # Mapeamento de posição para elementos do ambiente
         self.__alterado = False  # Indica se o modelo do mundo foi alterado
 
     @property
@@ -94,8 +96,7 @@ class ModeloMundo(ModeloPlan):
         Retorno:
             O elemento do ambiente na posição especificada pelo estado.
         """
-        if estado in self.__elementos:
-            return self.__elementos[estado]
+        self.__elementos.get(estado)
     
     def distancia(self, estado):
         """
@@ -108,9 +109,9 @@ class ModeloMundo(ModeloPlan):
             A distância entre o estado especificado e o estado atual do modelo do mundo.
         """
         # Verifica se o estado especificado está presente nos estados do modelo do mundo
-        if estado in self.__estados:
+        # if estado in self.__estados:
             # Calcula a distância entre os estados usando dist
-            return dist(estado.posicao, self.__estado.posicao)
+        return dist(self.__estado.posicao, estado.posicao)
     
     def actualizar(self, percepcao):
         """

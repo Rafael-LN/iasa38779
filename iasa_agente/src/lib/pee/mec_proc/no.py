@@ -11,9 +11,9 @@ class No:
         """
         self.estado = estado
         self.operador = operador
-        self.antecessor = antecessor
-        self._custo = custo
-        self._profundidade = 0
+        self.__antecessor = antecessor
+        self.__custo = custo
+        self.__profundidade = antecessor.profundidade + 1 if antecessor else 0
     
     @property
     def custo(self):
@@ -23,7 +23,7 @@ class No:
         Retorno:
             O custo associado a este nó.
         """
-        return self._custo
+        return self.__custo
 
     @property
     def profundidade(self):
@@ -33,7 +33,7 @@ class No:
         Retorno:
             A profundidade deste nó na árvore de busca.
         """
-        return self._profundidade
+        return self.__profundidade
     
     @property
     def antecessor(self):
@@ -43,7 +43,7 @@ class No:
         Retorno:
             O nó antecessor que leva a este nó.
         """
-        return self._antecessor
+        return self.__antecessor
     
     def __eq__(self, outro):
         """

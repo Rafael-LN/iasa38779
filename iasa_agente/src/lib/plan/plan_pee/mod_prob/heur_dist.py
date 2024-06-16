@@ -1,4 +1,4 @@
-import math
+from math import dist
 from pee.melhor_prim.heuristica import Heuristica
 
 class HeurDist(Heuristica):
@@ -34,4 +34,4 @@ class HeurDist(Heuristica):
         Retorna:
             float: A distância euclidiana entre o estado atual e o estado final.
         """
-        return math.dist(self.__estado_final.posicao, estado.posicao)
+        return dist(self.__estado_final.posicao, estado.posicao)

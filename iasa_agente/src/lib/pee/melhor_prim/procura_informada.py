@@ -21,5 +21,6 @@ class ProcuraInformada(ProcuraMelhorPrim):
         Returns:
             O nó solução encontrado pela procura.
         """
+        self._heuristica = heuristica
         self._avaliador.definir_heuristica(heuristica)
         return super().procurar(problema)

@@ -25,4 +25,4 @@ class AvaliadorSof(AvaliadorHeur):
         Retorna:
             float: O custo do nó, utilizado como prioridade na expansão.
         """
-        return no.custo
+        return self._heuristica.h(no.estado)
