@@ -2,17 +2,19 @@ from pee.melhor_prim.aval.avaliador import Avaliador
 
 class AvaliadorHeur(Avaliador):
     """
-    Classe que implementa um avaliador de prioridade para procura informada baseada em heurísticas.
-
-    Métodos:
-        definir_heuristica: Define a heurística a ser utilizada pelo avaliador.
+    Classe que implementa um avaliador heurístico.
+    Herda da classe Avaliador e utiliza uma função heurística para calcular a prioridade dos nós.
     """
 
     def definir_heuristica(self, heuristica):
         """
-        Define a heurística a ser utilizada pelo avaliador.
+        Define a função heurística a ser utilizada pelo avaliador.
 
-        Args:
-            heuristica: A função de heurística a ser definida para o avaliador.
+        Parâmetros:
+        heuristica: A função heurística que será utilizada para calcular a prioridade dos nós.
+
+        Funcionalidade:
+        Este método armazena a função heurística fornecida, que será utilizada posteriormente para avaliar a prioridade dos nós
+        durante a procura. A função heurística estima o custo restante para atingir o objetivo a partir de um determinado estado.
         """
         self._heuristica = heuristica
