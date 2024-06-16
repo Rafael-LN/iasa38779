@@ -2,32 +2,37 @@ from abc import ABC, abstractmethod
 
 class Plano(ABC):
     """
-    Interface abstrata para representar um plano no contexto de um agente de planeamento.
-
-    Métodos abstratos:
-        obter_accao(self, estado): Retorna a ação a ser tomada para um determinado estado.
-        mostrar(self, vista): Exibe ou apresenta o plano em uma determinada visão.
+    Classe abstrata que define a interface para um plano de ações no contexto de um agente autónomo.
+    Esta classe serve como base para a implementação de diferentes tipos de planos que podem ser gerados por vários mecanismos de planeamento.
     """
 
     @abstractmethod
     def obter_accao(self, estado):
         """
-        Método abstrato que deve ser implementado para retornar a ação a ser tomada para um determinado estado.
+        Método abstrato para obter a ação correspondente a um determinado estado.
 
         Parâmetros:
-            estado: O estado atual para o qual se deseja obter a ação.
+        estado: O estado para o qual se pretende obter a ação correspondente.
 
         Retorna:
-            Ação a ser tomada no estado fornecido.
+        A ação associada ao estado fornecido. O tipo de retorno específico será definido nas subclasses concretas.
+
+        Funcionalidade:
+        Este método deve ser implementado pelas subclasses para fornecer a ação adequada baseada no estado fornecido.
+        É um ponto de extensão para diferentes tipos de planos que podem ter mecanismos variados para determinar ações com base em estados.
         """
         pass
-    
+
     @abstractmethod
     def mostrar(self, vista):
         """
-        Método abstrato que deve ser implementado para exibir ou apresentar o plano em uma determinada visão.
+        Método abstrato para exibir a sequência de ações do plano utilizando uma vista fornecida.
 
         Parâmetros:
-            vista: A visão ou contexto em que o plano deve ser apresentado.
+        vista: Objeto responsável por exibir a visualização das ações do plano.
+
+        Funcionalidade:
+        Este método deve ser implementado pelas subclasses para fornecer uma maneira de visualizar o plano.
+        A implementação específica dependerá de como a informação do plano deve ser exibida, e do formato de visualização suportado pela vista fornecida.
         """
         pass
