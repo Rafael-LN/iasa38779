@@ -8,38 +8,42 @@ from plan.planeador import Planeador
 
 class PlaneadorPEE(Planeador):
     """
-    A classe PlaneadorPEE implementa um planeador que utiliza o algoritmo de procura em espaço de estados A* (ProcuraMelhorPrim) para planear trajetórias. Este planeador é projetado para gerar planos de ação para um agente com base em um modelo de planeamento e uma lista de objetivos.
-
-    Atributos:
-        __mec_pee (ProcuraMelhorPrim): Instância do mecanismo de procura A* utilizada para resolver o problema de planeamento.
+    Classe que implementa um planeador automático baseado no método PEE (Procura em Espaços de Estados).
+    Herda da classe Planeador e utiliza métodos de procura heurística para gerar planos de ação a partir de objetivos definidos.
     """
 
     def __init__(self):
         """
-        Método construtor da classe PlaneadorPEE.
-
-        Inicializa o planeador configurando o mecanismo de procura (__mec_pee) como None. A configuração do mecanismo de procura é feita no método planear.
-
-        Parâmetros:
-            Nenhum.
+        Inicializa uma nova instância do PlaneadorPEE.
+        
+        Atributos:
+        __mec_pee: Armazena o mecanismo de procura utilizado no planeamento. Inicialmente definido como None.
+        
+        Funcionalidade:
+        Este construtor inicializa o atributo __mec_pee como None, indicando que nenhum mecanismo de procura foi configurado ainda.
         """
         self.__mec_pee = None
-        
+
     def planear(self, modelo_plan, objectivos):
         """
-        Método que gera um plano de ação para um agente com base em um modelo de planeamento e uma lista de objetivos.
-
-        Este método utiliza o algoritmo de procura A* (ProcuraMelhorPrim) para resolver o problema de planeamento definido pelo modelo de planeamento e o estado objetivo. A heurística utilizada é a distância euclidiana (HeurDist) até o estado objetivo. A solução encontrada é convertida em um plano de ação (PlanoPEE).
+        Gera um plano de ação a partir de um modelo de planeamento e uma lista de objetivos.
 
         Parâmetros:
-            modelo_plan: Instância do modelo de planeamento que define os estados e operadores.
-            objectivos (list): Lista de estados objetivo a serem alcançados.
+        modelo_plan: Representa o modelo do mundo sobre o qual o planeamento será realizado.
+        objectivos: Lista de objetivos que o agente deve alcançar. Assume-se que a lista contém pelo menos um objetivo.
 
         Retorna:
-            PlanoPEE: Instância do plano de ação contendo a solução encontrada.
+        Um objeto PlanoPEE que representa o plano de ações gerado para alcançar o objetivo, ou None se não for possível encontrar uma solução.
+
+        Funcionalidade:
+        1. Verifica se a lista de objetivos não está vazia.
+        2. Extrai o primeiro objetivo como estado final desejado.
+        3. Cria uma instância de ProblemaPlan com base no modelo de planeamento e no estado final.
+        4. Cria uma heurística (HeurDist) com base no estado final para guiar a procura.
+        5. Inicializa o mecanismo de procura ProcuraMelhorPrim com a heurística criada.
+        6. Realiza a procura da solução utilizando o mecanismo de procura e a heurística.
+        7. Se uma solução for encontrada, retorna um PlanoPEE com a sequência de ações; caso contrário, retorna None.
         """
-       
-        
         if objectivos:
             estado_final = objectivos[0]
             problema = ProblemaPlan(modelo_plan, estado_final)
