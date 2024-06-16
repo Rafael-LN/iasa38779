@@ -7,31 +7,17 @@ from sae.ambiente.elemento import Elemento
 
 class ModeloMundo(ModeloPlan):
     """
-    Classe que representa o modelo do mundo.
-
-    Atributos:
-        __operadores (list): Lista de operadores disponíveis.
-        __estado (objeto): Estado atual do modelo do mundo.
-        __estados (list): Lista de estados conhecidos.
-        __elementos (dict): Mapeamento de posição para elementos do ambiente.
-        __alterado (bool): Indica se o modelo do mundo foi alterado.
-
-    Métodos:
-        __init__: Inicializa o modelo do mundo.
-        elementos: Obtém os elementos do ambiente mapeados por posição.
-        alterado: Verifica se o modelo do mundo foi alterado.
-        obter_estado: Obtém o estado atual do modelo do mundo.
-        obter_estados: Obtém a lista de estados conhecidos do modelo do mundo.
-        obter_operadores: Obtém a lista de operadores disponíveis para o modelo do mundo.
-        obter_elemento: Obtém o elemento do ambiente na posição especificada pelo estado.
-        distancia: Calcula a distância do estado especificado ao estado atual do modelo do mundo.
-        actualizar: Atualiza o modelo do mundo com base na percepção recebida.
-        mostrar: Mostra o modelo do mundo na vista especificada.
+    Classe que implementa o modelo do mundo para um agente autónomo.
+    Herda da classe ModeloPlan e fornece informações sobre o estado atual do mundo, os operadores disponíveis e os elementos presentes no ambiente.
     """
 
     def __init__(self):
         """
-        Inicializa o modelo do mundo.
+        Inicializa uma nova instância de ModeloMundo.
+
+        Funcionalidade:
+        Este construtor inicializa os operadores disponíveis, o estado atual do modelo do mundo, a lista de estados conhecidos,
+        um dicionário de elementos do ambiente e um indicador de alterações no modelo do mundo.
         """
         self.__operadores = [OperadorMover(self, direcao) for direcao in Direccao]  # Lista de operadores disponíveis
         self.__estado = None  # Estado atual do modelo do mundo
@@ -42,83 +28,84 @@ class ModeloMundo(ModeloPlan):
     @property
     def elementos(self):
         """
-        Obtém os elementos do ambiente mapeados por posição.
+        Retorna o dicionário de elementos do ambiente.
 
-        Retorno:
-            Um dicionário que mapeia posições para elementos do ambiente.
+        Retorna:
+        Um dicionário que mapeia posições para elementos do ambiente.
         """
         return self.__elementos
-    
+
     @property
     def alterado(self):
         """
-        Verifica se o modelo do mundo foi alterado.
+        Indica se o modelo do mundo foi alterado.
 
-        Retorno:
-            True se o modelo do mundo foi alterado, False caso contrário.
+        Retorna:
+        True se o modelo do mundo foi alterado, False caso contrário.
         """
         return self.__alterado
-    
+
     def obter_estado(self):
         """
         Obtém o estado atual do modelo do mundo.
 
-        Retorno:
-            O estado atual do modelo do mundo.
+        Retorna:
+        O estado atual do modelo do mundo.
         """
         return self.__estado
-    
+
     def obter_estados(self):
         """
         Obtém a lista de estados conhecidos do modelo do mundo.
 
-        Retorno:
-            Uma lista de estados conhecidos do modelo do mundo.
+        Retorna:
+        Uma lista de estados conhecidos.
         """
         return self.__estados
-    
+
     def obter_operadores(self):
         """
-        Obtém a lista de operadores disponíveis para o modelo do mundo.
+        Obtém a lista de operadores disponíveis no modelo do mundo.
 
-        Retorno:
-            Uma lista de operadores disponíveis para o modelo do mundo.
+        Retorna:
+        Uma lista de operadores que podem ser aplicados no modelo do mundo.
         """
         return self.__operadores
-    
+
     def obter_elemento(self, estado):
         """
-        Obtém o elemento do ambiente na posição especificada pelo estado.
+        Obtém o elemento presente numa determinada posição do estado.
 
-        Argumentos:
-            estado: O estado que contém a posição do elemento a ser obtido.
+        Parâmetros:
+        estado: O estado cuja posição será utilizada para obter o elemento correspondente.
 
-        Retorno:
-            O elemento do ambiente na posição especificada pelo estado.
+        Retorna:
+        O elemento presente na posição do estado fornecido, ou None se não houver elemento na posição.
         """
-        self.__elementos.get(estado)
-    
+        return self.__elementos.get(estado)
+
     def distancia(self, estado):
         """
-        Calcula a distância do estado especificado ao estado atual do modelo do mundo.
+        Calcula a distância entre o estado atual e um estado fornecido.
 
-        Argumentos:
-            estado: O estado para o qual calcular a distância.
+        Parâmetros:
+        estado: O estado para o qual se pretende calcular a distância.
 
-        Retorno:
-            A distância entre o estado especificado e o estado atual do modelo do mundo.
+        Retorna:
+        A distância euclidiana entre o estado atual e o estado fornecido.
         """
-        # Verifica se o estado especificado está presente nos estados do modelo do mundo
-        # if estado in self.__estados:
-            # Calcula a distância entre os estados usando dist
         return dist(self.__estado.posicao, estado.posicao)
-    
+
     def actualizar(self, percepcao):
         """
-        Atualiza o modelo do mundo com base na percepção recebida.
+        Atualiza o modelo do mundo com base numa nova perceção do ambiente.
 
-        Argumentos:
-            percepcao: A percepção recebida do ambiente.
+        Parâmetros:
+        percepcao: A perceção recebida do ambiente.
+
+        Funcionalidade:
+        Este método atualiza o estado atual do agente com base na perceção e verifica se houve mudanças nos elementos do ambiente.
+        Se houver mudanças, atualiza a lista de estados conhecidos e marca o modelo do mundo como alterado.
         """
         self.__estado = EstadoAgente(percepcao.posicao)
 
@@ -131,10 +118,14 @@ class ModeloMundo(ModeloPlan):
 
     def mostrar(self, vista):
         """
-        Mostra o modelo do mundo na vista especificada.
+        Mostra a visualização do modelo do mundo utilizando uma vista fornecida.
 
-        Argumentos:
-            vista: A vista na qual mostrar o modelo do mundo.
+        Parâmetros:
+        vista: Objeto responsável por exibir a visualização do modelo do mundo.
+
+        Funcionalidade:
+        Este método percorre os elementos do ambiente e utiliza a vista para mostrar elementos relevantes como alvos e obstáculos.
+        Adicionalmente, marca a posição do estado atual do agente na vista.
         """
         for posicao, elemento in self.__elementos.items():
             if elemento in [Elemento.ALVO, Elemento.OBSTACULO]:
