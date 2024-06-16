@@ -2,24 +2,24 @@ from pee.melhor_prim.procura_melhor_prim import ProcuraMelhorPrim
 
 class ProcuraInformada(ProcuraMelhorPrim):
     """
-    Classe que define o comportamento de uma procura informada, baseada na estratégia de Melhor-Primeiro.
-
-    Herda de ProcuraMelhorPrim.
-
-    Métodos:
-        procurar: Método para iniciar a procura informada, definindo uma heurística e chamando o método de procura da classe pai.
+    Classe que implementa um algoritmo de procura informada.
+    Herda da classe ProcuraMelhorPrim e permite a utilização de uma heurística específica para guiar a procura.
     """
 
     def procurar(self, problema, heuristica):
         """
-        Inicia a procura informada, configurando a heurística e chamando o método de procura da classe pai.
+        Realiza a procura de uma solução utilizando uma heurística especificada.
 
-        Args:
-            problema: O problema a ser resolvido.
-            heuristica: A heurística a ser usada na procura.
-        
-        Returns:
-            O nó solução encontrado pela procura.
+        Parâmetros:
+        problema: O problema de planeamento a ser resolvido.
+        heuristica: A função heurística a ser utilizada para avaliar a prioridade dos nós.
+
+        Retorna:
+        Uma instância de Solucao se uma solução for encontrada, ou None se não houver solução.
+
+        Funcionalidade:
+        Este método define a heurística a ser utilizada pelo avaliador, e então chama o método procurar da classe base
+        para realizar a procura com a heurística especificada.
         """
         self._heuristica = heuristica
         self._avaliador.definir_heuristica(heuristica)
