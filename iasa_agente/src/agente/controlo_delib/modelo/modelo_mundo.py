@@ -82,7 +82,7 @@ class ModeloMundo(ModeloPlan):
         Retorna:
         O elemento presente na posição do estado fornecido, ou None se não houver elemento na posição.
         """
-        return self.__elementos.get(estado)
+        return self.__elementos.get(estado.posicao)
 
     def distancia(self, estado):
         """

@@ -2,41 +2,38 @@ from pdm.mec_util import MecUtil
 
 class PDM:
     """
-    A classe PDM representa um modelo de Processos de Decisão de Markov (PDM) para o planeamento e determinação de políticas ótimas.
-
-    Atributos:
-        __modelo: Instância do modelo que define os estados e ações do PDM.
-        __mec_util: Instância de MecUtil que auxilia no cálculo das utilidades e das políticas.
-
-    Métodos:
-        __init__(self, modelo, gama, delta_max): Inicializa a instância da classe com os parâmetros fornecidos.
-        politica(self, U): Determina a política ótima para um dado vetor de utilidades.
-        resolver(self): Calcula as utilidades dos estados e determina a política ótima.
+    Classe que representa um Processo de Decisão Markoviano (PDM).
+    Utiliza um mecanismo de utilidade (MecUtil) para calcular a utilidade dos estados e derivar a política ótima.
     """
 
     def __init__(self, modelo, gama, delta_max):
         """
-        Inicializa uma instância da classe PDM.
+        Inicializa uma nova instância de PDM.
 
         Parâmetros:
-            modelo: Instância do modelo que define os estados e ações do PDM.
-            gama (float): Fator de desconto para recompensas diferidas.
-            delta_max (float): Critério de convergência para a diferença máxima na atualização das utilidades.
+        modelo: O modelo PDM que define os estados, ações, transições e recompensas.
+        gama: O fator de desconto utilizado no cálculo da utilidade.
+        delta_max: O valor máximo de variação (delta) para o critério de convergência.
 
-        Este método também inicializa uma instância de MecUtil para auxiliar nos cálculos das utilidades.
+        Funcionalidade:
+        Este construtor inicializa o modelo PDM, o mecanismo de utilidade, o fator de desconto e o valor máximo de variação para o critério de convergência.
         """
         self.__modelo = modelo
         self.__mec_util = MecUtil(modelo, gama, delta_max)
     
     def politica(self, U):
         """
-        Determina a política ótima para um dado vetor de utilidades.
+        Calcula a política ótima com base na utilidade dos estados.
 
         Parâmetros:
-            U (dict): Dicionário que mapeia estados às suas respectivas utilidades.
+        U: Um dicionário contendo a utilidade de cada estado.
 
         Retorna:
-            dict: Dicionário que mapeia estados às ações que maximizam a utilidade esperada.
+        Um dicionário que mapeia cada estado à ação ótima correspondente.
+
+        Funcionalidade:
+        Este método determina a ação que maximiza a utilidade esperada para cada estado,
+        utilizando a utilidade calculada previamente. A política ótima é derivada da maximização da utilidade esperada.
         """
         A = self.__modelo.A
         S = self.__modelo.S
@@ -51,12 +48,14 @@ class PDM:
     
     def resolver(self):
         """
-        Calcula as utilidades dos estados e determina a política ótima.
-
-        Este método utiliza a instância de MecUtil para calcular as utilidades e, em seguida, determina a política ótima com base nessas utilidades.
+        Resolve o PDM, calculando a utilidade dos estados e a política ótima.
 
         Retorna:
-            tuple: Um par contendo o dicionário de utilidades dos estados e o dicionário da política ótima.
+        Uma tupla contendo o dicionário de utilidades dos estados e a política ótima.
+
+        Funcionalidade:
+        Este método calcula a utilidade dos estados utilizando o mecanismo de utilidade (MecUtil) e, em seguida,
+        determina a política ótima com base nas utilidades calculadas. Retorna ambos os resultados.
         """
         U = self.__mec_util.utilidade()
         return U, self.politica(U)

@@ -1,79 +1,84 @@
 from pee.mec_proc.passo_solucao import PassoSolucao
 
-class Solucao():
+class Solucao:
     """
-    A classe Solucao é responsável por encapsular o percurso da 
-    solução encontrada a partir de um nó final, permitindo 
-    a iteração e o acesso indexado aos passos da solução, 
-    bem como fornecer a dimensão e o custo total do percurso.
+    Classe que representa a solução de um problema de procura.
+    Contém o percurso desde o estado inicial até o estado final, bem como o custo total da solução.
     """
+
     def __init__(self, no_final):
         """
-        Inicializa a solução a partir do nó final fornecido.
-        
-        Este método constrói o percurso desde o nó inicial até ao nó final, 
-        armazenando cada passo da solução numa lista de passos. Cada passo 
-        representa uma transição de estado gerada por um operador.
+        Inicializa uma nova instância de Solucao.
 
         Parâmetros:
-        no_final (No): O nó final da solução encontrada.
+        no_final: O nó final da solução encontrada.
+
+        Funcionalidade:
+        Este construtor inicializa a solução construindo o percurso do estado inicial até o estado final.
+        O percurso é construído a partir dos nós antecessores do nó final.
         """
         self.__no_final = no_final
         self.__percurso = []
         no = no_final
-        
+
         # Construir o percurso da solução
-        while no.antecessor():
+        while no.antecessor:
             # Criar um passo da solução a partir do estado do nó antecessor e do operador aplicado
-            passo = PassoSolucao(no.antecessor().estado, no.operador)
+            passo = PassoSolucao(no.antecessor.estado, no.operador)
             # Inserir o passo na primeira posição da lista de percurso
             self.__percurso.insert(0, passo)
             # Atualizar o nó atual para o nó antecessor
-            no = no.antecessor()
-        
+            no = no.antecessor
+
     @property
     def dimensao(self):
         """
-        Retorna a dimensão da solução.
-        
-        A dimensão da solução é o número de passos (transições de estado) 
-        necessários para chegar ao nó final a partir do nó inicial.
+        Obtém a dimensão da solução, ou seja, o número de passos no percurso.
 
         Retorna:
-        int: O número de passos na solução.
+        O número de passos na solução.
+
+        Funcionalidade:
+        Este método retorna a dimensão da solução, que é o tamanho da lista de percurso.
         """
         return len(self.__percurso)
-    
+
     @property
     def custo(self):
         """
-        Retorna o custo total da solução.
-        
-        O custo total é acumulado desde o estado inicial até ao estado 
-        do nó final.
+        Obtém o custo total da solução.
 
         Retorna:
-        float: O custo total da solução.
+        O custo total da solução.
+
+        Funcionalidade:
+        Este método retorna o custo acumulado do nó final, que representa o custo total da solução.
         """
         return self.__no_final.custo
 
     def __iter__(self):
         """
-        Permite a iteração sobre os passos da solução.
-        
+        Retorna um iterador para percorrer os passos da solução.
+
         Retorna:
-        iterator: Um iterador sobre a lista de passos da solução.
+        Um iterador para a lista de percurso.
+
+        Funcionalidade:
+        Este método permite iterar sobre os passos da solução usando um loop.
         """
         return iter(self.__percurso)
 
     def __getitem__(self, index):
         """
-        Permite o acesso indexado aos passos da solução.
-        
+        Obtém um passo da solução pelo índice.
+
         Parâmetros:
-        index (int): O índice do passo a ser retornado.
+        index: O índice do passo a ser obtido.
 
         Retorna:
-        PassoSolucao: O passo da solução na posição especificada.
+        O passo da solução correspondente ao índice fornecido.
+
+        Funcionalidade:
+        Este método permite acessar um passo específico da solução pelo índice, suportando a indexação da lista de percurso.
         """
         return self.__percurso[index]

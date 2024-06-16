@@ -1,17 +1,18 @@
 from dataclasses import dataclass
-
 from mod.estado import Estado
 from mod.operador import Operador
 
-
 @dataclass
-class PassoSolucao():
+class PassoSolucao:
     """
-    Classe que representa um passo de uma solução, contendo um estado e o operador que levou a esse estado.
+    Classe que representa um passo na solução de um problema de procura.
+    Contém um estado e o operador que levou a esse estado.
+    """
 
-    Atributos:
-        estado (Estado): O estado associado a este passo da solução.
-        operador (Operador): O operador que foi aplicado para chegar a este estado.
-    """
     estado: Estado
     operador: Operador
+    """
+    Atributos:
+    estado: O estado alcançado neste passo da solução.
+    operador: O operador aplicado para alcançar este estado.
+    """

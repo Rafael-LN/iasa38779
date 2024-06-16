@@ -1,39 +1,35 @@
 class MecUtil:
     """
-    Classe MecUtil responsável por calcular a utilidade em um Processo de Decisão Markoviano (PDM).
-
-    Atributos:
-        __modelo (ModeloPDM): Modelo PDM contendo estados, ações, transições e recompensas.
-        __gama (float): Taxa de desconto para recompensas diferidas no tempo.
-        __delta_max (float): Limiar de convergência para a diferença máxima de atualização das utilidades.
+    Classe que implementa o mecanismo de cálculo de utilidade para Processos de Decisão Markovianos (PDM).
+    Utiliza o método de iteração de valores para calcular a utilidade dos estados.
     """
-    
+
     def __init__(self, modelo, gama, delta_max):
         """
-        Inicializa a classe MecUtil com o modelo PDM, a taxa de desconto e o limiar de convergência.
+        Inicializa uma nova instância de MecUtil.
 
-        Args:
-            modelo (ModeloPDM): Modelo PDM contendo estados, ações, transições e recompensas.
-            gama (float): Taxa de desconto para recompensas diferidas no tempo.
-            delta_max (float): Limiar de convergência para a diferença máxima de atualização das utilidades.
+        Parâmetros:
+        modelo: O modelo PDM que define os estados, ações, transições e recompensas.
+        gama: O fator de desconto utilizado no cálculo da utilidade.
+        delta_max: O valor máximo de variação (delta) para o critério de convergência.
+
+        Funcionalidade:
+        Este construtor inicializa o modelo PDM, o fator de desconto e o valor máximo de variação para o critério de convergência.
         """
         self.__modelo = modelo
         self.__gama = gama
         self.__delta_max = delta_max
-        
+
     def utilidade(self):
         """
-        Calcula a utilidade de cada estado usando iteração de valor.
+        Calcula a utilidade dos estados utilizando o método de iteração de valores.
 
-        Este método implementa a técnica de Iteração de Valor para calcular a utilidade dos estados num
-        Processo de Decisão Markoviano (PDM). Inicialmente, as utilidades de todos os estados são definidas
-        como zero. O método então itera sobre cada estado, calculando a utilidade esperada como o valor máximo
-        das utilidades das ações possíveis, utilizando a função `util_accao`. A iteração continua até que a 
-        diferença máxima entre as utilidades atualizadas e as utilidades anteriores seja menor que um limiar
-        de convergência (`delta_max`).
+        Retorna:
+        Um dicionário contendo a utilidade de cada estado.
 
-        Returns:
-            Valor da utilidade de estado para a política óptima
+        Funcionalidade:
+        Este método calcula a utilidade de cada estado no PDM utilizando o método de iteração de valores.
+        A utilidade é atualizada iterativamente até que a variação máxima (delta) entre as iterações seja menor ou igual a delta_max.
         """
         S = self.__modelo.S
         A = self.__modelo.A
@@ -52,24 +48,21 @@ class MecUtil:
 
         return U
 
-    
     def util_accao(self, s, a, U):
         """
-        Método auxiliar para calcular a utilidade de um estado seguindo a
-        política ótima, obtendo a utilidade de uma ação através de um somatório.
+        Calcula a utilidade de uma ação a partir de um estado dado.
 
-        Este método calcula a soma do produto da probabilidade de transição de
-        estado pela recompensa esperada na transição de s para sn por meio de a,
-        adicionada ao produto do fator gama pela utilidade do estado sucessor.
-        A fórmula utilizada é: sum(T(s, a, s') * (R(s, a, s') + gama * U(s'))).
-        
-        Args:
-            s (Estado): estado atual no modelo do mundo.
-            a (Operador): ação que possibilita a transição para o próximo estado.
-            U (dict): dicionário contendo a utilidade dos estados anteriores.
-            
-        Returns:
-            valor do somatório calculado
+        Parâmetros:
+        s: O estado atual.
+        a: A ação a ser avaliada.
+        U: O dicionário de utilidades dos estados.
+
+        Retorna:
+        A utilidade da ação a partir do estado s.
+
+        Funcionalidade:
+        Este método calcula a utilidade de uma ação a partir de um estado dado, utilizando a função de transição,
+        a função de recompensa e o fator de desconto. A utilidade da ação é a soma das utilidades ponderadas dos estados sucessores.
         """
         T = self.__modelo.T
         R = self.__modelo.R
