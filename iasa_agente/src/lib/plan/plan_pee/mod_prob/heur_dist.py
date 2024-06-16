@@ -3,35 +3,33 @@ from pee.melhor_prim.heuristica import Heuristica
 
 class HeurDist(Heuristica):
     """
-    A classe HeurDist implementa uma heurística baseada na distância euclidiana entre o estado atual e o estado final.
-
-    Atributos:
-        __estado_final: Estado que representa o objetivo final do problema.
-
-    Métodos:
-        __init__(self, estado_final): Inicializa a instância da classe com o estado final objetivo.
-        h(self, estado): Calcula a heurística (distância euclidiana) entre o estado atual e o estado final.
+    Classe que implementa uma heurística baseada na distância euclidiana para o planeamento em espaços de estados.
+    Herda da classe Heuristica e utiliza a distância euclidiana entre a posição de um estado atual e a posição do estado final como valor heurístico.
     """
 
     def __init__(self, estado_final):
         """
-        Inicializa uma instância da classe HeurDist.
+        Inicializa uma nova instância de HeurDist com o estado final desejado.
 
         Parâmetros:
-            estado_final: Estado que representa o objetivo final do problema.
+        estado_final: O estado objetivo para o qual a heurística irá calcular a distância.
 
-        Este método inicializa o atributo estado_final com o valor fornecido.
+        Funcionalidade:
+        Este construtor armazena o estado final fornecido para uso posterior no cálculo da heurística.
         """
         self.__estado_final = estado_final
-        
+
     def h(self, estado):
         """
-        Calcula a heurística (distância euclidiana) entre o estado atual e o estado final.
+        Calcula o valor heurístico para um determinado estado com base na distância euclidiana até o estado final.
 
         Parâmetros:
-            estado: O estado atual para o qual se deseja calcular a heurística.
+        estado: O estado atual para o qual se pretende calcular o valor heurístico.
 
         Retorna:
-            float: A distância euclidiana entre o estado atual e o estado final.
+        A distância euclidiana entre a posição do estado atual e a posição do estado final.
+
+        Funcionalidade:
+        Este método utiliza a função dist da biblioteca math para calcular a distância euclidiana entre a posição do estado atual e a posição do estado final armazenado.
         """
         return dist(self.__estado_final.posicao, estado.posicao)
