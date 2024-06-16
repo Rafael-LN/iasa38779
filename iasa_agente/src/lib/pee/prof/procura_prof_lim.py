@@ -3,54 +3,63 @@ from pee.prof.procura_profundidade import ProcuraProfundidade
 
 class ProcuraProfLim(ProcuraProfundidade):
     """
-    Classe que implementa um mecanismo de procura em profundidade limitada.
-
-    Métodos:
-        __init__: Inicializa a busca em profundidade limitada com a profundidade máxima especificada.
-        prof_max: Propriedade para obter ou definir a profundidade máxima de busca.
-        _expandir: Expande um nó durante a busca, considerando a profundidade máxima.
+    Classe que implementa o algoritmo de procura em profundidade limitada.
+    Herda da classe ProcuraProfundidade e adiciona uma profundidade máxima para limitar a expansão dos nós.
     """
 
     def __init__(self, prof_max):
         """
-        Inicializa a busca em profundidade limitada com a profundidade máxima especificada.
+        Inicializa uma nova instância de ProcuraProfLim.
 
-        Args:
-            prof_max: A profundidade máxima de busca.
+        Parâmetros:
+        prof_max: A profundidade máxima permitida para a expansão dos nós.
+
+        Funcionalidade:
+        Este construtor inicializa a profundidade máxima e chama o construtor da classe base ProcuraProfundidade.
         """
-        self.__prof_max = prof_max
         super().__init__()
-        
+        self.__prof_max = prof_max
+
     @property
     def prof_max(self):
         """
-        Propriedade para obter a profundidade máxima de busca.
+        Obtém a profundidade máxima permitida para a expansão dos nós.
 
-        Retorno:
-            A profundidade máxima de busca.
+        Retorna:
+        A profundidade máxima.
+
+        Funcionalidade:
+        Este método retorna o valor da profundidade máxima permitida para a expansão dos nós.
         """
         return self.__prof_max
 
     @prof_max.setter
     def prof_max(self, prof_max):
         """
-        Propriedade para definir a profundidade máxima de busca.
+        Define a profundidade máxima permitida para a expansão dos nós.
 
-        Args:
-            prof_max: A profundidade máxima de busca.
+        Parâmetros:
+        prof_max: A nova profundidade máxima.
+
+        Funcionalidade:
+        Este método define um novo valor para a profundidade máxima permitida para a expansão dos nós.
         """
         self.__prof_max = prof_max
-    
+
     def _expandir(self, problema, no):
         """
-        Expande um nó durante a procura em profundidade limitada.
+        Expande um nó, gerando seus sucessores, respeitando a profundidade máxima.
 
-        Args:
-            problema: O problema a ser resolvido.
-            no: O nó a ser expandido durante a procura.
+        Parâmetros:
+        problema: O problema de planeamento que define os operadores.
+        no: O nó a ser expandido.
 
-        Retorno:
-            Uma lista de nós sucessores gerados pela expansão do nó atual.
+        Retorna:
+        Um gerador de nós sucessores.
+
+        Funcionalidade:
+        Este método expande o nó apenas se a sua profundidade for menor do que a profundidade máxima permitida.
+        Utiliza o método de expansão da classe base para gerar os sucessores.
         """
         if no.profundidade < self.prof_max:
-           yield from super()._expandir(problema, no) 
+            yield from super()._expandir(problema, no)
