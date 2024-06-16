@@ -42,6 +42,7 @@ class ControloDelib(Controlo):
         if self.__reconsiderar():
             self.__deliberar()
             self.__planear()
+        self.__mostrar()
         return self.__executar()
 
     def __assimilar(self, percepcao):
@@ -117,4 +118,4 @@ class ControloDelib(Controlo):
 
         if self.__objectivos:
             for objectivo in self.__objectivos:
-                self.vista.marcar_posicao(objectivo)  # Marca os objetivos no ambiente
+                self.vista.marcar_posicao(objectivo.posicao)  # Marca os objetivos no ambiente

@@ -2,7 +2,7 @@ from pdm.mec_util import MecUtil
 
 class PDM:
     """
-    Classe que representa um Processo de Decisão Markoviano (PDM).
+    Classe que implementa um Processo de Decisão Markoviano (PDM).
     Utiliza um mecanismo de utilidade (MecUtil) para calcular a utilidade dos estados e derivar a política ótima.
     """
 
@@ -41,8 +41,9 @@ class PDM:
 
         for s in S():
             # Determina a ação que maximiza a utilidade esperada
-            melhor_acao = max(A(s), key=lambda a: self.__mec_util.util_accao(s, a, U))
-            politica[s] = melhor_acao
+            if A(s):
+                melhor_acao = max(A(s), key=lambda a: self.__mec_util.util_accao(s, a, U))
+                politica[s] = melhor_acao
 
         return politica
     

@@ -2,52 +2,51 @@ from plan.plano import Plano
 
 class PlanoPDM(Plano):
     """
-    A classe PlanoPDM representa um plano baseado em Processos de Decisão de Markov (PDM), contendo utilidades dos estados e a política ótima.
-
-    Atributos:
-        __utilidade (dict): Dicionário que mapeia estados às suas respectivas utilidades.
-        __politica (dict): Dicionário que mapeia estados às ações ótimas a serem tomadas.
-
-    Métodos:
-        __init__(self, utilidade, politica): Inicializa a instância da classe com as utilidades dos estados e a política ótima.
-        obter_accao(self, estado): Retorna a ação ótima a ser tomada para um determinado estado.
-        mostrar(self, vista): Exibe as utilidades dos estados e as ações da política ótima em uma determinada visão.
+    Classe que implementa um plano baseado em Processos de Decisão Markovianos (PDM).
+    Herda da classe Plano e armazena a utilidade dos estados e a política de ações.
     """
 
     def __init__(self, utilidade, politica):
         """
-        Inicializa uma instância da classe PlanoPDM.
+        Inicializa uma nova instância de PlanoPDM.
 
         Parâmetros:
-            utilidade (dict): Dicionário que mapeia estados às suas respectivas utilidades.
-            politica (dict): Dicionário que mapeia estados às ações ótimas a serem tomadas.
+        utilidade: Um dicionário contendo a utilidade de cada estado.
+        politica: Um dicionário contendo a ação ótima para cada estado.
 
-        Este método inicializa os atributos utilidade e politica com os valores fornecidos.
+        Funcionalidade:
+        Este construtor inicializa a utilidade dos estados e a política de ações com os valores fornecidos.
         """
         self.__utilidade = utilidade
         self.__politica = politica
 
     def obter_accao(self, estado):
         """
-        Retorna a ação ótima a ser tomada para um determinado estado.
+        Obtém a ação a ser executada para um dado estado com base na política.
 
         Parâmetros:
-            estado: O estado para o qual se deseja obter a ação.
+        estado: O estado para o qual se pretende obter a ação.
 
         Retorna:
-            Ação ótima a ser tomada no estado fornecido, ou None se o estado não estiver na política definida.
+        A ação ótima para o estado fornecido, ou None se o estado não estiver na política.
+
+        Funcionalidade:
+        Este método retorna a ação ótima associada ao estado fornecido de acordo com a política calculada.
+        Verifica se o estado está presente na política antes de retornar a ação.
         """
         if estado and estado in self.__politica:
             return self.__politica[estado]
 
     def mostrar(self, vista):
         """
-        Exibe as utilidades dos estados e as ações da política ótima em uma determinada visão.
+        Mostra a visualização do plano utilizando uma vista fornecida.
 
         Parâmetros:
-            vista: A visão ou contexto em que o plano deve ser apresentado.
+        vista: Objeto responsável por exibir a visualização do plano.
 
-        Este método utiliza a visão fornecida para exibir os valores de utilidade e as direções das ações ótimas para cada estado.
+        Funcionalidade:
+        Este método utiliza a vista para mostrar a utilidade dos estados e a direção das ações associadas.
+        Para cada estado, exibe o valor da utilidade e a ação ótima.
         """
         if self.__politica:
             for estado, valor in self.__utilidade.items():

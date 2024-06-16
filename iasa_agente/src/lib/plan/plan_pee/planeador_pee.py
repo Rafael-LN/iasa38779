@@ -48,8 +48,8 @@ class PlaneadorPEE(Planeador):
             estado_final = objectivos[0]
             problema = ProblemaPlan(modelo_plan, estado_final)
             heuristica = HeurDist(estado_final)
-            self.__mec_pee = ProcuraMelhorPrim(heuristica)
-            solucao = self.__mec_pee.procurar(problema, heuristica)
+            self.__mec_pee = ProcuraMelhorPrim(AvaliadorCustoUnif())
+            solucao = self.__mec_pee.procurar(problema)
 
             if solucao:
                 return PlanoPEE(solucao)

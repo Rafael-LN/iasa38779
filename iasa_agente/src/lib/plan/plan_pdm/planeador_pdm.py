@@ -5,42 +5,38 @@ from plan.planeador import Planeador
 
 class PlaneadorPDM(Planeador):
     """
-    A classe PlaneadorPDM estende a classe Planeador e implementa um planeador baseado em Processos de Decisão de Markov (PDM).
-
-    Atributos:
-        __gama (float): Fator de desconto para recompensas diferidas.
-        __delta_max (float): Critério de convergência para a diferença máxima na atualização das utilidades.
-
-    Métodos:
-        __init__(self, gama=0.85, delta_max=1): Inicializa a instância da classe com os parâmetros fornecidos.
-        planear(self, modelo_plan, objetivos): Gera um plano baseado em PDM para os objetivos fornecidos.
+    Classe que implementa um planeador baseado em Processos de Decisão Markovianos (PDM).
+    Herda da classe Planeador e utiliza um PDM para gerar planos de ação que maximizam a utilidade dos estados.
     """
 
     def __init__(self, gama=0.85, delta_max=1):
         """
-        Inicializa uma instância da classe PlaneadorPDM.
+        Inicializa uma nova instância de PlaneadorPDM.
 
         Parâmetros:
-            gama (float, opcional): Fator de desconto para recompensas diferidas, com valor padrão de 0.85.
-            delta_max (float, opcional): Critério de convergência para a diferença máxima na atualização das utilidades, com valor padrão de 1.
+        gama: O fator de desconto utilizado no cálculo da utilidade.
+        delta_max: O valor máximo de variação (delta) para o critério de convergência.
 
-        Este método inicializa os atributos gama e delta_max com os valores fornecidos ou os valores padrão.
+        Funcionalidade:
+        Este construtor inicializa os parâmetros gama e delta_max para o cálculo da utilidade no PDM.
         """
         self.__gama = gama
         self.__delta_max = delta_max
 
     def planear(self, modelo_plan, objetivos):
         """
-        Gera um plano baseado em PDM para os objetivos fornecidos.
-
-        Este método cria uma instância de ModeloPDMPlan com o modelo de planeamento e os objetivos, resolve o PDM utilizando a classe PDM, e retorna um plano com as utilidades e políticas calculadas.
+        Gera um plano de ações para alcançar os objetivos a partir do modelo de planeamento utilizando um PDM.
 
         Parâmetros:
-            modelo_plan: Instância do modelo de planeamento que define os estados e ações.
-            objetivos: Lista de estados objetivo a serem alcançados.
+        modelo_plan: O modelo de planeamento que define os estados e operadores.
+        objetivos: A lista de objetivos que se pretende alcançar.
 
         Retorna:
-            PlanoPDM: Um plano contendo as utilidades dos estados e a política ótima para alcançar os objetivos.
+        Um plano de ações representado pela classe PlanoPDM.
+
+        Funcionalidade:
+        Este método cria um ModeloPDMPlan com base no modelo de planeamento e nos objetivos fornecidos,
+        resolve o PDM para calcular a utilidade dos estados e a política ótima, e retorna um plano de ações que maximiza a utilidade.
         """
         modelo_pdm = ModeloPDMPlan(modelo_plan, objetivos)
         pdm = PDM(modelo_pdm, self.__gama, self.__delta_max)

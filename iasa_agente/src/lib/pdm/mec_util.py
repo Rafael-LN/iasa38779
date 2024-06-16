@@ -33,7 +33,7 @@ class MecUtil:
         """
         S = self.__modelo.S
         A = self.__modelo.A
-        U = {s: 0 for s in S()}
+        U = {s: 0.0 for s in S()}
 
         while True:
             Uant = U.copy()
@@ -67,5 +67,6 @@ class MecUtil:
         T = self.__modelo.T
         R = self.__modelo.R
         gama = self.__gama
-
-        return sum(T(s, a, sn) * (R(s, a, sn) + gama * U[sn]) for sn in self.__modelo.S())
+        suc = self.__modelo.suc
+        
+        return sum(T(s, a, sn) * (R(s, a, sn) + gama * U[sn]) for sn in suc(s, a))
