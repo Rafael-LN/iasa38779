@@ -2,66 +2,73 @@ from plan.plano import Plano
 
 class PlanoPEE(Plano):
     """
-    A classe PlanoPEE representa um plano baseado em uma sequência de passos (solução) gerados por um algoritmo de planeamento.
-
-    Atributos:
-        __passos (list): Lista de passos que compõem a solução do plano.
-
-    Métodos:
-        __init__(self, solucao): Inicializa a instância da classe com a solução fornecida.
-        obter_accao(self, estado): Retorna a ação a ser tomada para um determinado estado, removendo o passo correspondente da lista.
-        mostrar(self, vista): Exibe os passos do plano como vetores em uma determinada visão.
+    Classe que representa um plano gerado pelo planeador PEE (Procura em Espaços de Estados).
+    Herda da classe Plano e armazena a sequência de passos (ações) necessários para alcançar o objetivo.
     """
 
     def __init__(self, solucao):
         """
-        Inicializa uma instância da classe PlanoPEE.
+        Inicializa uma nova instância do PlanoPEE com base na solução fornecida.
 
         Parâmetros:
-            solucao (list): Lista de passos que compõem a solução do plano.
+        solucao: Lista de passos que constituem a solução encontrada pelo mecanismo de procura.
 
-        Este método inicializa o atributo __passos com os passos fornecidos na solução.
+        Funcionalidade:
+        Este construtor inicializa o atributo __passos, que armazena a sequência de passos do plano.
+        Cada passo é extraído da solução fornecida.
         """
         self.__passos = [passo for passo in solucao]
-        
+
     def obter_accao(self, estado):
         """
-        Retorna a ação a ser tomada para um determinado estado.
+        Obtém a ação correspondente a um estado específico.
 
         Parâmetros:
-            estado: O estado atual para o qual se deseja obter a ação.
+        estado: O estado para o qual se pretende obter a ação correspondente.
 
         Retorna:
-            Operador correspondente ao estado atual, removido da lista de passos.
+        O operador (ação) correspondente ao estado fornecido, ou None se o estado não for encontrado na lista de passos.
+
+        Funcionalidade:
+        Este método percorre a lista de passos e verifica se o estado do passo coincide com o estado fornecido.
+        Se encontrar uma correspondência, retorna o operador associado a esse passo.
+        Caso contrário, retorna None.
         """
         for passo in self.__passos:
             if passo.estado == estado:
                 return passo.operador
         return None
-    
+
     def validar_estado(self, estado):
         """
-        Valida se um estado está presente no plano.
+        Verifica se um determinado estado está presente na lista de passos do plano.
 
-        Args:
-            estado (Estado): O estado a ser validado.
+        Parâmetros:
+        estado: O estado a ser validado.
 
         Retorna:
-            bool: True se o estado está presente no plano, False caso contrário.
+        True se o estado estiver presente na lista de passos, False caso contrário.
+
+        Funcionalidade:
+        Este método percorre a lista de passos e verifica se o estado do passo coincide com o estado fornecido.
+        Se encontrar uma correspondência, retorna True, indicando que o estado é válido dentro do plano.
+        Caso contrário, retorna False.
         """
         for passo in self.__passos:
             if passo.estado == estado:
                 return True
         return False
-    
+
     def mostrar(self, vista):
         """
-        Exibe os passos do plano como vetores em uma determinada visão.
+        Exibe a sequência de passos do plano utilizando uma vista fornecida.
 
         Parâmetros:
-            vista: A visão ou contexto em que o plano deve ser apresentado.
+        vista: Objeto responsável por exibir a visualização dos passos.
 
-        Este método utiliza a visão fornecida para exibir os vetores dos passos do plano.
+        Funcionalidade:
+        Este método percorre a lista de passos e, para cada passo, utiliza a vista fornecida para mostrar a posição do estado e o ângulo do operador.
+        Se a lista de passos não estiver vazia, cada passo é exibido através da função mostrar_vector da vista.
         """
         if self.__passos:
             for passo in self.__passos:
